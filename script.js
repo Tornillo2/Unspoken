@@ -145,7 +145,7 @@ function navigateTo(page) {
             window.location.href = `nivells${currentLevel}.html`;
             break;
         case 'nivells':
-            window.location.href = 'nivells.html';
+            window.location.href = 'nivells';
             break;
         case 'instruccions':
             //obrir el dialog d'instruccions
