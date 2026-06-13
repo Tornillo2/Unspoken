@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introspoken - Nivell 6: El Bosc Nocturn</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="game-container">
+        <header class="game-header">
+            <button class="btn-tornar" data-tts="Tornar al camí de nivells." onclick="window.location.href='/Nivells/index.html'">⬅️ Camí</button>
+            <h1 tabindex="0" data-tts="Nivell sis: El Bosc Nocturn.">Nivell 6: Bosc Nocturn</h1>
+        </header>
+
+        <section class="description-card" tabindex="0" data-tts="La nit ha caigut completament sobre el bosc. L'entorn s'ha tornat fosc i misteriós, inundat d'ombres blaves i negres. Ara els animals del dia dormen, i comença el torn dels de la nit. Escolta amb atenció el cant d'un mussol llunyà i el cruixir de les branques sota la llum de la lluna.">
+            <h2>Imagina l'entorn:</h2>
+            <p>La nit ha caigut del tot i t'endinses en el <strong>bosc nocturn</strong>, ple de misteri.</p>
+            <p>Sota la llum de la lluna, sents el <strong>cant d'un mussol llunyà</strong> i el suau cruixir de les branques de l'alta nit.</p>
+        </section>
+
+        <section class="audio-controls">
+            <button id="btn-audio" class="btn-play-nocturn" data-tts="Botó de so. Prem per escoltar els sons del bosc nocturn.">
+                <span class="icon">🦉</span> 
+                <span class="text">Escotar la Nit</span>
+            </button>
+        </section>
+
+        <section id="zona-preguntes" class="quiz-section">
+            <h2 id="titol-pregunta" tabindex="0">Pregunta del nivell:</h2>
+
+            <div class="quiz-container" style="display: none;">
+                <p class="pregunta-text">Quin animal es pot escoltar cantant de lluny en aquest bosc?</p>
+                <div class="quiz-options">
+                    <button class="btn-resposta" data-correcta="false" data-tts="Opció A: Un ocell fuster picant un pi de dia.">A) Un ocell fuster picant un pi de dia.</button>
+                    <button class="btn-resposta" data-correcta="true" data-tts="Opció B: Un mussol llunyà amagat entre les ombres.">B) Un mussol llunyà amagat entre les ombres.</button>
+                    <button class="btn-resposta" data-correcta="false" data-tts="Opció C: Una àliga volant sota el sol.">C) Una àliga volant sota el sol.</button>
+                </div>
+            </div>
+
+            <div class="quiz-container" style="display: none;">
+                <p class="pregunta-text">Què il·lumina el camí del jugador en aquest nivell?</p>
+                <div class="quiz-options">
+                    <button class="btn-resposta" data-correcta="true" data-tts="Opció A: La llum clara de la lluna a la nit.">A) La llum clara de la lluna a la nit.</button>
+                    <button class="btn-resposta" data-correcta="false" data-tts="Opció B: Els raigs d'un sol molt potent de migdia.">B) Els raigs d'un sol molt potent de migdia.</button>
+                    <button class="btn-resposta" data-correcta="false" data-tts="Opció C: Un munt de llums de colors d'una ciutat.">C) Un munt de llums de colors d'una ciutat.</button>
+                </div>
+            </div>
+
+            <div class="quiz-container" style="display: none;">
+                <p class="pregunta-text">Com es descriu l'atmosfera d'aquest bosc a l'alta nit?</p>
+                <div class="quiz-options">
+                    <button class="btn-resposta" data-correcta="false" data-tts="Opció A: Molt sorollosa plena de cotxes i fums.">A) Molt sorollosa plena de cotxes i fums.</button>
+                    <button class="btn-resposta" data-correcta="false" data-tts="Opció B: Un espai completament obert i sense cap arbre.">B) Un espai completament obert i sense cap arbre.</button>
+                    <button class="btn-resposta" data-correcta="true" data-tts="Opció C: Un entorn fosc, misteriós i ple d'ombres.">C) Un entorn fosc, misteriós i ple d'ombres.</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="zona-seguent" style="display: none; margin-top: 30px;">
+            <button id="btn-seguent" class="btn-seg" data-tts="Felicitats! Has completat el nivell a les fosques." onclick="window.location.href='/Nivells/Nivell 7/index.html'">Anar al Nivell 7</button>
+        </section>
+
+        <audio id="sound-effect" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3" loop></audio>
+    </main>
+
+    <script>
+        const btnAudio = document.getElementById('btn-audio');
+        const àudioNit = document.getElementById('sound-effect');
+        const zonaSeguent = document.getElementById('zona-seguent');
+        const titolPregunta = document.getElementById('titol-pregunta');
+
+        let reproduint = false;
+
+        function parlar(text, callback) {
+            window.speechSynthesis.cancel();
+            const missatge = new SpeechSynthesisUtterance(text);
+            missatge.lang = 'ca-ES';
+            missatge.rate = 1.0;
+            if (callback) missatge.onend = callback;
+            window.speechSynthesis.speak(missatge);
+        }
+
+        function actualitzarLectorsVeu() {
+            document.querySelectorAll('[data-tts]').forEach(element => {
+                element.onmouseenter = () => { parlar(element.getAttribute('data-tts')); };
+                element.onfocus = () => { parlar(element.getAttribute('data-tts')); };
+            });
+        }
+
+        function inicialitzarPregunta() {
+            const llistaPreguntes = document.querySelectorAll('.quiz-container');
+            if (llistaPreguntes.length === 0) return;
+
+            const indexAleatori = Math.floor(Math.random() * llistaPreguntes.length);
+            const preguntaEscollida = llistaPreguntes[indexAleatori];
+            preguntaEscollida.style.display = "block";
+
+            const textDeLaPregunta = preguntaEscollida.querySelector('.pregunta-text').innerText;
+            titolPregunta.setAttribute('data-tts', "Pregunta del nivell: " + textDeLaPregunta);
+
+            const botonsResposta = preguntaEscollida.querySelectorAll('.btn-resposta');
+
+            botonsResposta.forEach(boto => {
+                boto.addEventListener('click', () => {
+                    botonsResposta.forEach(b => b.disabled = true);
+
+                    const esCorrecta = boto.getAttribute('data-correcta') === "true";
+
+                    if (esCorrecta) {
+                        boto.style.backgroundColor = "#1e8449"; // Es manté el verd d'encert
+                        boto.style.borderColor = "#52be80";
+                        boto.style.color = "#ffffff";
+                        zonaSeguent.style.display = "block";
+                        actualitzarLectorsVeu();
+                        parlar("Excel·lent! Has superat els perills de la nit. Prem el botó inferior per acabar l'aventura.");
+                    } else {
+                        boto.style.backgroundColor = "#5c1d1d"; 
+                        boto.style.borderColor = "#e74c3c";
+                        boto.style.color = "#ffffff";
+                        parlar("Aquesta resposta no és correcta. Torna a carregar la pàgina per orientar-te a la foscor.");
+                    }
+                });
+            });
+
+            actualitzarLectorsVeu();
+        }
+
+        btnAudio.addEventListener('click', () => {
+            if (!reproduint) {
+                àudioNit.play();
+                btnAudio.querySelector('.text').innerText = "Aturar la Nit";
+                btnAudio.querySelector('.icon').innerText = "⏹️";
+                btnAudio.setAttribute('data-tts', "Botó de so. Prem per aturar l'ambient de la nit.");
+                reproduint = true;
+                parlar("Iniciant el so ambiental del bosc nocturn.");
+            } else {
+                àudioNit.pause();
+                btnAudio.querySelector('.text').innerText = "Escotar la Nit";
+                btnAudio.querySelector('.icon').innerText = "🦉";
+                btnAudio.setAttribute('data-tts', "Botó de so. Prem per escoltar el bosc nocturn.");
+                reproduint = false;
+                parlar("So de la nit aturat.");
+            }
+        });
+
+        window.onload = () => {
+            inicialitzarPregunta();
+        };
+    </script>
+</body>
+</html>
