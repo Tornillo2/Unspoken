@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introspoken - Nivell 3: Els Ocells</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="game-container">
+        <header class="game-header">
+            <button class="btn-tornar" data-tts="Tornar al camí de nivells." onclick="window.location.href='/Nivells/index.html'">⬅️ Camí</button>
+            <h1 tabindex="0" data-tts="Nivell tres: Els Ocells i la Fauna.">Nivell 3: Els Ocells</h1>
+        </header>
+
+        <section class="description-card" tabindex="0" data-tts="A dalt de tot de les capçades, el bosc batega ple de vida. Es sents un cant d'ocells alegre i variat: refilets ràpids, piulades de pardals i el repicar rítmic d'un picot fuster sobre l'escorça d'un pi. Són els músics del bosc que saluden el nou dia.">
+            <h2>Imagina l'entorn:</h2>
+            <p>A dalt de tot de les capçades, el bosc batega de vida. Es sent un <strong>cant d'ocells alegre i variat</strong>.</p>
+            <p>Refilets ràpids, piulades de pardals i el <strong>repicar rítmic d'un picot fuster</strong> saluden el nou dia.</p>
+        </section>
+
+        <section class="audio-controls">
+            <button id="btn-audio" class="btn-play-ocells" data-tts="Botó de so. Prem per escoltar el cant dels ocells.">
+                <span class="icon">🐦</span> 
+                <span class="text">Escotar els Ocells</span>
+            </button>
+        </section>
+
+        <section id="zona-preguntes" class="quiz-section">
+            <h2 id="titol-pregunta" tabindex="0" data-tts="">Pregunta del nivell:</h2>
+            <p id="pregunta-text" class="pregunta-text"></p>
+            
+            <div id="quiz-options" class="quiz-options">
+                </div>
+        </section>
+
+        <section id="zona-seguent" style="display: none; margin-top: 30px;">
+            <button id="btn-seguent" class="btn-seg" data-tts="Felicitats! Has encertat. Prem aquí per anar al Nivell quatre." onclick="window.location.href='nivell4.html'">Anar al Nivell 4 ➡️</button>
+        </section>
+
+        <audio id="sound-effect" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" loop></audio>
+    </main>
+
+    <script>
+        const btnAudio = document.getElementById('btn-audio');
+        const àudioOcells = document.getElementById('sound-effect');
+        const zonaSeguent = document.getElementById('zona-seguent');
+        const titolPregunta = document.getElementById('titol-pregunta');
+        const textPregunta = document.getElementById('pregunta-text');
+        const contenidorOpcions = document.getElementById('quiz-options');
+
+        let reproduint = false;
+
+        // Banc de preguntes aleatòries per al Nivell 3
+        const preguntesNivell3 = [
+            {
+                pregunta: "Quin ocell fa un repicar rítmic sobre l'escorça d'un pi?",
+                opcions: [
+                    { text: "A) Una àliga daurada que sobrevola el bosc.", correcta: false, tts: "Opció A: Una àliga daurada que sobrevola el bosc." },
+                    { text: "B) Un picot fuster.", correcta: true, tts: "Opció B: Un picot fuster." },
+                    { text: "C) Un mussol que s'ha despertat de nit.", correcta: false, tts: "Opció C: Un mussol que s'ha despertat de nit." }
+                ]
+            },
+            {
+                pregunta: "Com es descriu el cant d'aquests animals?",
+                opcions: [
+                    { text: "A) És un cant alegre i variat, amb refilets i piulades.", correcta: true, tts: "Opció A: És un cant alegre i variat, amb refilets i piulades." },
+                    { text: "B) Són ronsaments i crits de por.", correcta: false, tts: "Opció B: Són ronsaments i crits de por." },
+                    { text: "C) És un silenci absolut sense cap mena de so.", correcta: false, tts: "Opció C: És un silenci absolut sense cap mena de so." }
+                ]
+            },
+            {
+                pregunta: "A qui es refereix el text com els 'músics del bosc'?",
+                opcions: [
+                    { text: "A) Al soroll que fan les branques seques en caure.", correcta: false, tts: "Opció A: Al soroll que fan les branques seques en caure." },
+                    { text: "B) Al pas dels excursionsites que caminen.", correcta: false, tts: "Opció B: Al pas dels excursionsites que caminen." },
+                    { text: "C) Als ocells que saluden el nou dia.", correcta: true, tts: "Opció C: Als ocells que saluden el nou dia." }
+                ]
+            }
+        ];
+
+        function parlar(text, callback) {
+            window.speechSynthesis.cancel();
+            const missatge = new SpeechSynthesisUtterance(text);
+            missatge.lang = 'ca-ES';
+            missatge.rate = 1.0;
+            if (callback) missatge.onend = callback;
+            window.speechSynthesis.speak(missatge);
+        }
+
+        function actualitzarLectorsVeu() {
+            const totsElements = document.querySelectorAll('[data-tts]');
+            totsElements.forEach(element => {
+                element.onmouseenter = () => { parlar(element.getAttribute('data-tts')); };
+                element.onfocus = () => { parlar(element.getAttribute('data-tts')); };
+            });
+        }
+
+        function carregarPreguntaAleatoria() {
+            const indexAleatori = Math.floor(Math.random() * preguntesNivell3.length);
+            const dadesPregunta = preguntesNivell3[indexAleatori];
+
+            textPregunta.innerText = dadesPregunta.pregunta;
+            titolPregunta.setAttribute('data-tts', "Pregunta del nivell: " + dadesPregunta.pregunta);
+            contenidorOpcions.innerHTML = "";
+
+            dadesPregunta.opcions.forEach(opcio => {
+                const boto = document.createElement('button');
+                boto.className = "btn-resposta";
+                boto.innerText = opcio.text;
+                boto.setAttribute('data-tts', opcio.tts);
+
+                boto.addEventListener('click', () => {
+                    const botons = contenidorOpcions.querySelectorAll('.btn-resposta');
+                    botons.forEach(b => b.disabled = true);
+
+                    if (opcio.correcta) {
+                        boto.style.backgroundColor = "#1e8449";
+                        boto.style.borderColor = "#52be80";
+                        boto.style.color = "#ffffff";
+                        zonaSeguent.style.display = "block";
+                        actualitzarLectorsVeu();
+                        parlar("Fantàstic! Has trobat la resposta correcta. Prem el botó de baix per continuar el camí.");
+                    } else {
+                        boto.style.backgroundColor = "#641e1e";
+                        boto.style.borderColor = "#ec7063";
+                        boto.style.color = "#ffffff";
+                        parlar("Aquesta opció no és la bona. Torna a recarregar la pàgina per canviar de pregunta.");
+                    }
+                });
+
+                contenidorOpcions.appendChild(boto);
+            });
+
+            actualitzarLectorsVeu();
+        }
+
+        btnAudio.addEventListener('click', () => {
+            if (!reproduint) {
+                àudioOcells.play();
+                btnAudio.querySelector('.text').innerText = "Aturar Ocells";
+                btnAudio.querySelector('.icon').innerText = "⏹️";
+                btnAudio.setAttribute('data-tts', "Botó de so. Prem per aturar el cant dels ocells.");
+                reproduint = true;
+                parlar("Iniciant el cant dels ocells al bosc.");
+            } else {
+                àudioOcells.pause();
+                btnAudio.querySelector('.text').innerText = "Escotar els Ocells";
+                btnAudio.querySelector('.icon').innerText = "🐦";
+                btnAudio.setAttribute('data-tts', "Botó de so. Prem per escoltar el cant dels ocells.");
+                reproduint = false;
+                parlar("So dels ocells aturat.");
+            }
+        });
+
+        window.onload = () => {
+            carregarPreguntaAleatoria();
+        };
+    </script>
+</body>
+</html>
