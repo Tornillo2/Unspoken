@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Introspoken - Nivell 10: El Gran Repàs Final</title>
     <link rel="stylesheet" href="style.css">
+    <script src="/jquery-4.0.0.min.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
 
     <main class="game-container">
         <header class="game-header">
-            <button class="btn-tornar" data-tts="Tornar al camí de nivells." onclick="window.location.href='/Nivells/index.html'">⬅️ Camí</button>
+            <button class="btn-tornar" data-tts="Tornar als nivells." onclick="window.location.href='/Nivells/index.html'">⬅️ Tornar</button>
             <h1 tabindex="0" data-tts="Nivell deu: El Gran Repàs de tot el camí.">Nivell 10: Gran Repàs</h1>
         </header>
 
@@ -21,88 +23,12 @@
         </section>
 
         <section id="zona-preguntes" class="quiz-section">
-            
-            <div class="quiz-container" id="p1">
-                <h2 class="num-pregunta">Pregunta 1 de 9 (Nivell 1: L'Aigua)</h2>
-                <p class="pregunta-text">Quin so fa el riu quan l'aigua baixa tranquil·la entre les pedres?</p>
-                <div class="quiz-options">
-                    <button class="btn-resposta" data-correcta="true" data-tts="Un murmuri suau i constant.">A) Un murmuri suau i constant.</button>
-                    <button class="btn-resposta" data-correcta="false" data-tts="Un soroll de vidres trencant-se.">B) Un soroll de vidres trencant-se.</button>
-                </div>
+            <div class="quiz-container">
+                <h2 class="num-pregunta" id="num-pregunta-titol" tabindex="0" data-tts="">Carregant nivells...</h2>
+                <p class="pregunta-text" id="pregunta-text" tabindex="0" data-tts=""></p>
+                <div class="quiz-options" id="quiz-options">
+                    </div>
             </div>
-
-            <div class="quiz-container" id="p2" style="display: none;">
-                <h2 class="num-pregunta">Pregunta 2 de 9 (Nivell 2: Els Arbres)</h2>
-                <p class="pregunta-text">Quin element de la natura fa que les fulles i les branques dels arbres es moguin i tinguin veu?</p>
-                <div class="quiz-options">
-                    <button class="btn-resposta" data-correcta="false" data-tts="La llum del sol.">A) La llum del sol.</button>
-                    <button class="btn-resposta" data-correcta="true" data-tts="La força del vent.">B) La força del vent.</button>
-                </div>
-            </div>
-
-            <div class="quiz-container" id="p3" style="display: none;">
-                <h2 class="num-pregunta">Pregunta 3 de 9 (Nivell 3: Ocells del Matí)</h2>
-                <p class="pregunta-text">A quin moment del dia els ocells fan el seu cant més alegre?</p>
-                <div class="quiz-options">
-                    <button class="btn-resposta" data-correcta="true" data-tts="Al matí, amb l'alba.">A) Al matí, amb els premiers raigs de l'alba.</button>
-                    <button class="btn-resposta" data-correcta="false" data-tts="A l'alta nit.">B) A l'alta nit de lluna plena.</button>
-                </div>
-            </div>
-
-            <div class="quiz-container" id="p4" style="display: none;">
-                <h2 class="num-pregunta">Pregunta 4 de 9 (Nivell 4: Passos Amagats)</h2>
-                <p class="pregunta-text">Quin soroll fan els petits animals com l'eriçó quan es mouen pel terra del bosc?</p>
-                <div class="quiz-options">
-                    <button class="btn-resposta" data-correcta="false" data-tts="Un fort rugit salvatge.">A) Un fort rugit salvatge.</button>
-                    <button class="btn-resposta" data-correcta="true" data-tts="Un cruixir suau de fullaraca seca.">B) Un cruixir suau de fullaraca seca.</button>
-                </div>
-            </div>
-
-            <div class="quiz-container" id="p5" style="display: none;">
-                <h2 class="num-pregunta">Pregunta 5 de 9 (Nivell 5: La Pluja)</h2>
-                <p class="pregunta-text">Com ressona el xàfec suau quan les gotes toquen la terra humida?</p>
-                <div class="quiz-options">
-                    <button class="btn-resposta" data-correcta="true" data-tts="Un repic rítmic i relaxant.">A) Un repic rítmic, tou i relaxant.</button>
-                    <button class="btn-resposta" data-correcta="false" data-tts="Un cop sec de fusta.">B) Un cop sec i fort de fusta trencada.</button>
-                </div>
-            </div>
-
-            <div class="quiz-container" id="p6" style="display: none;">
-                <h2 class="num-pregunta">Pregunta 6 de 9 (Nivell 6: Bosc Nocturn)</h2>
-                <p class="pregunta-text">Quin animal d'ulls grans es pot escoltar cantant des de la llunyania a la foscor?</p>
-                <div class="quiz-options">
-                    <button class="btn-resposta" data-correcta="false" data-tts="Una àliga daurada.">A) Una àliga daurada de dia.</button>
-                    <button class="btn-resposta" data-correcta="true" data-tts="Un mussol llunyà.">B) Un mussol llunyà entre les ombres.</button>
-                </div>
-            </div>
-
-            <div class="quiz-container" id="p7" style="display: none;">
-                <h2 class="num-pregunta">Pregunta 7 de 9 (Nivell 7: Grans Animals)</h2>
-                <p class="pregunta-text">Quin tipus de so llança el cérvol mascle per fer notar la seva presència al bosc?</p>
-                <div class="quiz-options">
-                    <button class="btn-resposta" data-correcta="true" data-tts="Un bram potent.">A) Un bram potent que ressona lluny.</button>
-                    <button class="btn-resposta" data-correcta="false" data-tts="Un refilet fluixet.">B) Un refilet fluixet d'ocell petit.</button>
-                </div>
-            </div>
-
-            <div class="quiz-container" id="p8" style="display: none;">
-                <h2 class="num-pregunta">Pregunta 8 de 9 (Nivell 8: Els Insectes)</h2>
-                <p class="pregunta-text">Quin insecte genera un zumzeig constant mentre vola buscant pol·len de flor en flor?</p>
-                <div class="quiz-options">
-                    <button class="btn-resposta" data-correcta="false" data-tts="El grill de terra.">A) El grill amagat sota la fulla.</button>
-                    <button class="btn-resposta" data-correcta="true" data-tts="L'abella obrera.">B) L'abella vibrant de primavera.</button>
-                </div>
-            </div>
-
-            <div class="quiz-container" id="p9" style="display: none;">
-                <h2 class="num-pregunta">Pregunta 9 de 9 (Nivell 9: La Tempesta)</h2>
-                <p class="pregunta-text">Quin és el 'grunyit de la terra' que se sent retrunyir amb força durant la tempesta?</p>
-                <div class="quiz-options">
-                    <button class="btn-resposta" data-correcta="true" data-tts="El tro.">A) El tro que acompanya els llamps.</button>
-                    <button class="btn-resposta" data-correcta="false" data-tts="El cant de les abelles.">B) El cant i brunzit de les abelles.</button>
-                </div>
-            </div>
-
         </section>
 
         <section id="zona-seguent" style="display: none; margin-top: 30px;">
@@ -111,84 +37,10 @@
                 <h2>Has completat el Gran Repàs!</h2>
                 <p>Has demostrat ser un autèntic expert en tots els sons de la natura.</p>
             </div>
-            <button id="btn-seguent" class="btn-seg" data-tts="Felicitats! Prem aquí per acabar el joc del tot." onclick="window.location.href='../final.html'">Finalitzar Joc 🏁</button>
+            <button id="btn-seguent" class="btn-seg" data-tts="Felicitats! Prem aquí per acabar el joc del tot.">Finalitzar Joc 🏁</button>
         </section>
 
     </main>
 
-    <script>
-        let preguntaActual = 1;
-        const totalPreguntes = 9;
-
-        function parlar(text) {
-            window.speechSynthesis.cancel();
-            const missatge = new SpeechSynthesisUtterance(text);
-            missatge.lang = 'ca-ES';
-            missatge.rate = 1.0;
-            window.speechSynthesis.speak(missatge);
-        }
-
-        function actualitzarLectorsVeu() {
-            document.querySelectorAll('[data-tts]').forEach(element => {
-                element.onmouseenter = () => { parlar(element.getAttribute('data-tts')); };
-                element.onfocus = () => { parlar(element.getAttribute('data-tts')); };
-            });
-        }
-
-        function gestionarRespostes() {
-            for (let i = 1; i <= totalPreguntes; i++) {
-                const contenedor = document.getElementById(`p${i}`);
-                const botons = contenedor.querySelectorAll('.btn-resposta');
-
-                botons.forEach(boto => {
-                    boto.addEventListener('click', () => {
-                        // Desactivar botons d'aquest bloc
-                        botons.forEach(b => b.disabled = true);
-
-                        const esCorrecta = boto.getAttribute('data-correcta') === "true";
-
-                        if (esCorrecta) {
-                            boto.style.backgroundColor = "#1e8449"; // Verd encert
-                            boto.style.borderColor = "#52be80";
-                            boto.style.color = "#ffffff";
-                            
-                            parlar("Correcte!");
-
-                            // Esperem un segon i passem a la següent pregunta
-                            setTimeout(() => {
-                                contenedor.style.display = "none"; // S'amaga l'actual
-                                
-                                if (preguntaActual < totalPreguntes) {
-                                    preguntaActual++;
-                                    const seguentContenedor = document.getElementById(`p${preguntaActual}`);
-                                    seguentContenedor.style.display = "block"; // Es mostra la següent
-                                    
-                                    // Llegir text de la nova pregunta
-                                    const textPregunta = seguentContenedor.querySelector('.pregunta-text').innerText;
-                                    parlar("Següent pregunta: " + textPregunta);
-                                } else {
-                                    // Si era l'última, activem la victòria
-                                    document.getElementById('zona-seguent').style.display = "block";
-                                    parlar("Enhorabona! Has respost correctament totes les preguntes. Ets el Mestre de la Natura.");
-                                }
-                                actualitzarLectorsVeu();
-                            }, 1200);
-
-                        } else {
-                            boto.style.backgroundColor = "#5c1d1d"; // Vermell error
-                            boto.style.borderColor = "#e74c3c";
-                            boto.style.color = "#ffffff";
-                            parlar("Aquesta resposta no és correcta. Torna a carregar el repàs des del principi.");
-                        }
-                    });
-                });
-            }
-        }
-
-        window.onload = () => {
-            gestionarRespostes();
-            actualitzarLectorsVeu();
-        };
-    </script>
 </body>
 </html>
