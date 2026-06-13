@@ -72,7 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
         titleElement.textContent = "1. Continua el Nivell";
       }
       if (subtextElement) {
-        subtextElement.textContent = "Segueix jugant i aprenent des del nivell on et vas quedar.";
+        subtextElement.textContent =
+          "Segueix jugant i aprenent des del nivell on et vas quedar.";
       }
       continueButton.dataset.tts =
         "Opció 1: Continuar el nivell. Segueix jugant i aprenent des del nivell on et vas quedar.";
@@ -83,7 +84,8 @@ document.addEventListener("DOMContentLoaded", () => {
       titleElement.textContent = "1. Comença";
     }
     if (subtextElement) {
-      subtextElement.textContent = "Comença el nivell 1 i inicia l'aprenentatge de la natura.";
+      subtextElement.textContent =
+        "Comença el nivell 1 i inicia l'aprenentatge de la natura.";
     }
     continueButton.dataset.tts =
       "Opció 1: Comença. Inicia el nivell 1 i aprèn els elements de la natura des del principi.";
@@ -182,7 +184,12 @@ document.addEventListener("DOMContentLoaded", () => {
         //extreure el nivell actual i guardar-lo a localStorage
         if (data && data.current_level) {
           localStorage.setItem("currentLevel", data.current_level);
-          console.log("Continuing game with ID:", currentGameID, "at level:", data.current_level);
+          console.log(
+            "Continuing game with ID:",
+            currentGameID,
+            "at level:",
+            data.current_level,
+          );
           updateContinueButtonLabel(data.current_level);
         }
       },
@@ -190,9 +197,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (jqXHR.status === 404) {
         var json = jqXHR.responseJSON;
         if (json.ok === false && json.reason === "No progress found") {
-            //encara no hi havia res guardar
+          //encara no hi havia res guardar
         } else {
-            console.log("Error desconegut en extrure el progrés: " + JSON.stringify(json));
+          console.log(
+            "Error desconegut en extrure el progrés: " + JSON.stringify(json),
+          );
         }
       } else {
         console.log("Otro tipo de error: " + jqXHR.status);
@@ -231,9 +240,31 @@ function navigateTo(page) {
         if (closeButton) {
           closeButton.focus();
         }
+        speak(
+          document.getElementsByClassName("instructions-dialog__content")[0]
+            .textContent,
+        );
       }
       break;
     default:
       console.error("Unknown page:", page);
   }
 }
+
+const speak = (message) => {
+  console.log("Speaking option:", message);
+
+  if (!message) {
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(message);
+  utterance.lang = "ca-ES";
+  utterance.rate = 0.95;
+  utterance.pitch = 1;
+  utterance.volume = 1;
+
+  window.speechSynthesis.speak(utterance);
+};
