@@ -20,7 +20,7 @@ body{
     align-items:center;
     background:
         linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-        url('');
+        url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1600');
     background-size:cover;
     background-position:center;
     color:white;
@@ -78,20 +78,29 @@ button:hover{
 <body>
 
 <div class="container">
-    <h1>Unspoken</h1>
-    <p>En Manel ha agafat un atac d'engoixa abans de tindre una reunió important, l'has de tranquilitar i ajudar a sortir del seu despatx perquè pugi arribar a la seva reunió tranquil</p>
+    <h1>Escape Room</h1>
+    <p>Troba les pistes, resol els enigmes i escapa abans que s'acabi el temps.</p>
 
-    <button onclick="startGame()">Començar</button>
+            <h2>Què trobaràs?</h2>
+            <p>
+                Codis secrets, missatges ocults, preguntes interactives i proves
+                que posaran a prova la teva capacitat d'anàlisi i treball en equip.
+            </p>
+        </div>
+
+        <button class="btn" onclick="alert('Comença l’aventura!')">
+            ▶ Començar Joc
+        </button>
 
     <div class="subtitle">
-        Tens 15 minuts per escapar...
+        Tens 60 minuts per escapar...
     </div>
 </div>
 
 <script>
 function startGame() {
-    // contador
-    window.location.href = "start.html";
+    alert("Comença l'aventura!");
+    // window.location.href = "joc.html";
 }
 </script>
 
