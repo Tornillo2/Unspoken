@@ -1,115 +1,82 @@
-/* ==========================
-   ESCAPE ROOM COMUNICACIÓ
-   ========================== */
-
-* {
+/* Configuració general i colors de la natura */
+body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background-color: #f8f9fa;
-    color: #222;
-    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #122315; /* Verd bosc molt fosc (bon contrast) */
+    color: #f4f9f4; /* Blanc trencat suau per no cansar la vista */
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    min-height: 100vh;
 }
 
-.menu {
-    max-width: 700px;
+/* Contenidor del Menú */
+.menu-container {
     width: 100%;
-    background-color: white;
-    padding: 3rem;
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-}
-
-/* Títol */
-
-h1 {
+    max-width: 600px;
+    padding: 20px;
     text-align: center;
-    font-size: 2.8rem;
-    font-weight: 200;
-    letter-spacing: -1px;
-    margin-bottom: 1.5rem;
-    color: #111;
 }
 
-/* Introducció */
-
-.intro {
-    text-align: center;
-    color: #555;
-    line-height: 1.8;
-    margin-bottom: 2.5rem;
+.menu-header h1 {
+    font-size: 2.5rem;
+    color: #85e39d; /* Verd brillant per ressaltar el títol */
+    margin-bottom: 10px;
 }
 
-/* Secció d'informació */
-
-.info {
-    margin-bottom: 2rem;
+.menu-header p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    color: #cbdccb;
 }
 
-.info h2 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
+/* Estructura dels botons */
+.menu-options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espai entre botons perquè no es cliqui per error */
 }
 
-.info p {
-    color: #666;
-    line-height: 1.7;
-}
-
-/* Botons */
-
-.btn {
-    width: 100%;
-    padding: 1rem;
-    margin-top: 1rem;
-    border: 1px solid #dcdcdc;
-    border-radius: 10px;
-    background-color: white;
-    color: #222;
-    font-size: 1rem;
-    font-weight: 500;
+/* Estil de cada botó (Gran i fàcil de clicar) */
+.menu-btn {
+    background-color: #1b3822; /* Verd fosc */
+    border: 3px solid #387648; /* Vora marcada */
+    border-radius: 15px;
+    color: #ffffff;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    text-align: left;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: all 0.3s ease;
+    width: 100%;
 }
 
-.btn:hover {
-    background-color: #222;
-    color: white;
-    border-color: #222;
+/* Icones grans */
+.menu-btn .icon {
+    font-size: 2.5rem;
+    margin-right: 20px;
 }
 
-/* Temps */
-
-.temps {
-    text-align: center;
-    margin-top: 2rem;
-    color: #777;
-    font-size: 0.9rem;
+/* Textos de dins el botó */
+.menu-btn .text {
+    font-size: 1.4rem;
+    font-weight: bold;
+    display: block;
 }
 
-/* Responsive */
+.menu-btn .subtext {
+    font-size: 1rem;
+    color: #a3cfa3;
+    display: block;
+    margin-top: 4px;
+}
 
-@media (max-width: 768px) {
-
-    body {
-        padding: 1rem;
-    }
-
-    .menu {
-        padding: 2rem;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
+/* Efecte visual quan es passa el ratolí o es selecciona (Focus) */
+.menu-btn:hover, .menu-btn:focus {
+    background-color: #285834;
+    border-color: #85e39d; /* La vora brilla en verd clar */
+    transform: scale(1.03); /* El botó s'engrandeix una mica */
+    outline: none; /* Treu la vora per defecte del navegador */
 }

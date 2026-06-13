@@ -3,53 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escape Room de la Comunicació</title>
-
+    <title>L'Eco de la Natura - Menú Principal</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="menu">
+    <main class="menu-container">
+        <header class="menu-header">
+            <h1>L'Eco de la Natura</h1>
+            <p>Benvingut/da. Selecciona una opció per començar el teu viatge sonor.</p>
+        </header>
 
-        <h1>Escape Room de la Comunicació</h1>
+        <nav class="menu-options">
+            <button class="menu-btn o-aprenentatge" aria-label="Opció 1: El Despertar dels Sentits. Mode Aprenentatge.">
+                <span class="icon">🌲</span>
+                <span class="text">1. El Despertar dels Sentits</span>
+                <span class="subtext">Aprèn els sons de la natura un per un.</span>
+            </button>
 
-        <p class="intro">
-            Benvingut/da a una missió on la comunicació és la clau per escapar.
-            Hauràs de resoldre enigmes, interpretar missatges i descobrir pistes
-            relacionades amb els elements i processos de la comunicació.
-        </p>
+            <button class="menu-btn o-repte" aria-label="Opció 2: El Repte del Bosc. Prova Final.">
+                <span class="icon">🦉</span>
+                <span class="text">2. El Repte del Bosc</span>
+                <span class="subtext">Escolta el bosc, identifica els sons i relaxa't.</span>
+            </button>
 
-        <div class="info">
-            <h2>Objectiu</h2>
-            <p>
-                Supera tots els reptes abans que s'acabi el temps i demostra que
-                domines els conceptes bàsics de la comunicació.
-            </p>
+            <button class="menu-btn o-calma" aria-label="Opció 3: El Racó de la Calma. Mode Relax.">
+                <span class="icon">💧</span>
+                <span class="text">3. El Racó de la Calma</span>
+                <span class="subtext">Sons continus per meditar o descansar.</span>
+            </button>
 
-            <h2>Què trobaràs?</h2>
-            <p>
-                Codis secrets, missatges ocults, preguntes interactives i proves
-                que posaran a prova la teva capacitat d'anàlisi i treball en equip.
-            </p>
-        </div>
-
-        <button class="btn" onclick="alert('Comença l’aventura!')">
-            ▶ Començar Joc
-        </button>
-
-        <button class="btn" onclick="alert('Normes del joc')">
-            📖 Instruccions
-        </button>
-
-        <button class="btn" onclick="alert('Informació del projecte')">
-            ℹ Sobre el joc
-        </button>
-
-        <p class="temps">
-            ⏳ Temps estimat: 20-30 minuts
-        </p>
-
-    </div>
+            <button class="menu-btn o-ajuda" aria-label="Opció 4: Com es juga? Instruccions de veu.">
+                <span class="icon">🔊</span>
+                <span class="text">4. Com es juga?</span>
+                <span class="subtext">Escolta les instruccions del joc.</span>
+            </button>
+        </nav>
+    </main>
 
 </body>
 </html>
