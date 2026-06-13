@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introspoken - Nivell 8: El Món dels Insectes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="game-container">
+        <header class="game-header">
+            <button class="btn-tornar" data-tts="Tornar al camí de nivells." onclick="window.location.href='/Nivells/index.html'">⬅️ Camí</button>
+            <h1 tabindex="0" data-tts="Nivell vuit: El Món dels Insectes.">Nivell 8: Els Insectes</h1>
+        </header>
+
+        <section class="description-card" tabindex="0" data-tts="Si t'ajups i escoltes amb atenció prop de l'herba, descobriràs un món ple de vibracions. Sents el zumzeig constant de les abelles buscant pol·len i el cric-cric rítmic d'un grill amagat sota una fulla seca. Milers de potes diminutes es mouen entre la molsa, creant la banda sonora més petita del bosc.">
+            <h2>Imagina l'entorn:</h2>
+            <p>Baixes la mirada cap a l'herba, on la <strong>vida microscòpica</strong> no s'atura mai.</p>
+            <p>L'aire vibra amb el <strong>zumzeig de les abelles</strong> i el famós cant rascant dels grills entre la molsa humida.</p>
+        </section>
+
+        <section class="audio-controls">
+            <button id="btn-audio" class="btn-play-insectes" data-tts="Botó de so. Prem per escoltar el zumzeig i el cant dels insectes.">
+                <span class="icon">🐝</span> 
+                <span class="text">Escotar els Insectes</span>
+            </button>
+        </section>
+
+        <section id="zona-preguntes" class="quiz-section">
+            <h2 id="titol-pregunta" tabindex="0">Pregunta del nivell:</h2>
+
+            <div class="quiz-container" style="display: none;">
+                <p class="pregunta-text">Quin so característic fan les abelles mentre volen entre les flors?</p>
+                <div class="quiz-options">
+                    <button class="btn-resposta" data-correcta="false" data-tts="Opció A: Un fort rugit que espanta a tothom.">A) Un fort rugit que espanta a tothom.</button>
+                    <button class="btn-resposta" data-correcta="true" data-tts="Opció B: Un zumzeig constant i vibrant.">B) Un zumzeig constant i vibrant.</button>
+                    <button class="btn-resposta" data-correcta="false" data-tts="Opció C: El so d'unes campanes sonant de lluny.">C) El so d'unes campanes sonant de lluny.</button>
+                </div>
+            </div>
+
+            <div class="quiz-container" style="display: none;">
+                <p class="pregunta-text">On es troba amagat el grill que fa el seu cant rítmic?</p>
+                <div class="quiz-options">
+                    <button class="btn-resposta" data-correcta="true" data-tts="Opció A: Amagat sota una fulla seca prop de terra.">A) Amagat sota una fulla seca prop de terra.</button>
+                    <button class="btn-resposta" data-correcta="false" data-tts="Opció B: Dalt de tot d'un núvol al cel.">B) Dalt de tot d'un núvol al cel.</button>
+                    <button class="btn-resposta" data-correcta="false" data-tts="Opció C: Dins d'una ampolla de vidre tancada.">C) Dins d'una ampolla de vidre tancada.</button>
+                </div>
+            </div>
+
+            <div class="quiz-container" style="display: none;">
+                <p class="pregunta-text">Com es descriu la banda sonora que creen aquests animals?</p>
+                <div class="quiz-options">
+                    <button class="btn-resposta" data-correcta="false" data-tts="Opció A: Una música de piano molt lenta i trista.">A) Una música de piano molt lenta i trista.</button>
+                    <button class="btn-resposta" data-correcta="false" data-tts="Opció B: Un soroll de màquines tallant llenya.">B) Un soroll de màquines tallant llenya.</button>
+                    <button class="btn-resposta" data-correcta="true" data-tts="Opció C: La banda sonora més petita i vibrant del bosc.">C) La banda sonora més petita i vibrant del bosc.</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="zona-seguent" style="display: none; margin-top: 30px;">
+            <button id="btn-seguent" class="btn-seg" data-tts="Molt bé! Has descobert el món dels insectes. Prem per continuar l'aventura." onclick="window.location.href='/Nivells/Nivell 9/index.html'">Anar al Nivell 9</button>
+        </section>
+
+        <audio id="sound-effect" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" loop></audio>
+    </main>
+
+    <script>
+        const btnAudio = document.getElementById('btn-audio');
+        const àudioInsectes = document.getElementById('sound-effect');
+        const zonaSeguent = document.getElementById('zona-seguent');
+        const titolPregunta = document.getElementById('titol-pregunta');
+
+        let reproduint = false;
+
+        function parlar(text, callback) {
+            window.speechSynthesis.cancel();
+            const missatge = new SpeechSynthesisUtterance(text);
+            missatge.lang = 'ca-ES';
+            missatge.rate = 1.0;
+            if (callback) missatge.onend = callback;
+            window.speechSynthesis.speak(missatge);
+        }
+
+        function actualitzarLectorsVeu() {
+            document.querySelectorAll('[data-tts]').forEach(element => {
+                element.onmouseenter = () => { parlar(element.getAttribute('data-tts')); };
+                element.onfocus = () => { parlar(element.getAttribute('data-tts')); };
+            });
+        }
+
+        function inicialitzarPregunta() {
+            const llistaPreguntes = document.querySelectorAll('.quiz-container');
+            if (llistaPreguntes.length === 0) return;
+
+            const indexAleatori = Math.floor(Math.random() * llistaPreguntes.length);
+            const preguntaEscollida = llistaPreguntes[indexAleatori];
+            preguntaEscollida.style.display = "block";
+
+            const textDeLaPregunta = preguntaEscollida.querySelector('.pregunta-text').innerText;
+            titolPregunta.setAttribute('data-tts', "Pregunta del nivell: " + textDeLaPregunta);
+
+            const botonsResposta = preguntaEscollida.querySelectorAll('.btn-resposta');
+
+            botonsResposta.forEach(boto => {
+                boto.addEventListener('click', () => {
+                    botonsResposta.forEach(b => b.disabled = true);
+
+                    const esCorrecta = boto.getAttribute('data-correcta') === "true";
+
+                    if (esCorrecta) {
+                        boto.style.backgroundColor = "#1e8449"; // Verd encert
+                        boto.style.borderColor = "#52be80";
+                        boto.style.color = "#ffffff";
+                        zonaSeguent.style.display = "block";
+                        actualitzarLectorsVeu();
+                        parlar("Fantàstic! Tens una oïda excel·lent per als petits detalls. Prem per continuar.");
+                    } else {
+                        boto.style.backgroundColor = "#5c1d1d"; // Vermell error
+                        boto.style.borderColor = "#e74c3c";
+                        boto.style.color = "#ffffff";
+                        parlar("Oh, aquesta no és l'opció bona. Torna a carregar la pàgina per escoltar millor els insectes.");
+                    }
+                });
+            });
+
+            actualitzarLectorsVeu();
+        }
+
+        btnAudio.addEventListener('click', () => {
+            if (!reproduint) {
+                àudioInsectes.play();
+                btnAudio.querySelector('.text').innerText = "Aturar Sons";
+                btnAudio.querySelector('.icon').innerText = "⏹️";
+                btnAudio.setAttribute('data-tts', "Botó de so. Prem per silenciar els insectes.");
+                reproduint = true;
+                parlar("Iniciant el zumzeig i el cant del micro-món.");
+            } else {
+                àudioInsectes.pause();
+                btnAudio.querySelector('.text').innerText = "Escotar els Insectes";
+                btnAudio.querySelector('.icon').innerText = "🐝";
+                btnAudio.setAttribute('data-tts', "Botó de so. Prem per escoltar els insectes.");
+                reproduint = false;
+                parlar("Sons aturats.");
+            }
+        });
+
+        window.onload = () => {
+            inicialitzarPregunta();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+/* ==========================================================================
+   ESTILS NIVELL 8: EL MÓN DELS INSECTES
+   ========================================================================== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121808; /* Verd oliva fosc gairebé negre */
+    color: #f4f9e8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 650px;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.btn-tornar {
+    background-color: #243010;
+    border: 2px solid #4a5d23;
+    color: #d4e157; /* Verd llima suau */
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    float: left;
+    transition: all 0.2s ease;
+}
+
+.btn-tornar:hover {
+    background-color: #324316;
+    outline: none;
+}
+
+.game-header h1 {
+    font-size: 2.6rem;
+    color: #d4e157;
+    margin-top: 60px;
+    margin-bottom: 25px;
+    clear: both;
+}
+
+.description-card {
+    background-color: #1a230e;
+    border: 2px solid #2d3d18;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: left;
+    margin-bottom: 35px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.description-card h2 { color: #d4e157; font-size: 1.3rem; }
+.description-card p { font-size: 1.15rem; line-height: 1.6; color: #cbd6b1; }
+
+.audio-controls { margin-bottom: 40px; }
+
+/* BOTÓ DELS INSECTES PREMIUM (Efecte vibració) */
+.btn-play-insectes {
+    background: linear-gradient(135deg, #243010, #4a5d23);
+    border: 3px solid #d4e157;
+    border-radius: 50px;
+    color: #ffffff;
+    padding: 22px 50px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-play-insectes:hover, .btn-play-insectes:focus {
+    transform: scale(1.08);
+    box-shadow: 0 0 20px rgba(212, 225, 87, 0.3);
+    outline: none;
+}
+
+.btn-play-insectes:hover .icon, .btn-play-insectes:focus .icon {
+    animation: zumzeig 0.2s ease infinite;
+}
+
+@keyframes zumzeig {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    50% { transform: translate(-1px, -1px) rotate(1deg); }
+    100% { transform: translate(1px, -1px) rotate(-1deg); }
+}
+
+/* SECCIÓ DE PREGUNTES */
+.quiz-section {
+    margin-top: 20px;
+    text-align: left;
+    padding-top: 20px;
+    border-top: 2px solid #243010;
+}
+
+.quiz-section h2 { color: #aebfbe; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
+.pregunta-text { font-size: 1.4rem; font-weight: bold; margin-bottom: 25px; color: #ffffff; }
+
+.quiz-options { display: flex; flex-direction: column; gap: 16px; }
+
+.btn-resposta {
+    background-color: #1a230e;
+    border: 2px solid #2d3d18;
+    color: #cbd6b1;
+    padding: 18px 25px;
+    border-radius: 16px;
+    font-size: 1.15rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.23s ease;
+}
+
+.btn-resposta:hover:not(:disabled), .btn-resposta:focus:not(:disabled) {
+    background-color: #243010;
+    border-color: #d4e157;
+    transform: translateX(5px);
+    outline: none;
+}
+
+.btn-resposta:disabled { cursor: not-allowed; opacity: 0.8; }
+
+/* BOTÓ SEGUENT */
+.btn-seg {
+    background-color: #3c4f1c;
+    border: 3px solid #d4e157;
+    color: white;
+    padding: 18px 45px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    transition: all 0.2s ease;
+}
+
+.btn-seg:hover {
+    background-color: #4a5d23;
+    transform: scale(1.05);
+}
