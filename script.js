@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const instructions = [
         "Benvingut a Introspoken.",
         "Aquest joc està pensat per funcionar amb el teclat i l'àudio.",
-        "Prem Tab per moure't entre les opcions, i Enter o Espai per activar-les.",
+        "Prem les fletxes o les tecles W, A, S i D per moure't entre les opcions, i Enter o Espai per activar-les.",
         "En posar-te a cada opció, s'escoltarà una descripció de que consta.",
     ].join(' ');
 
@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const speakOption = (button) => {
-        const title = button.querySelector('.text')?.textContent?.trim() || '';
-        const description = button.querySelector('.subtext')?.textContent?.trim() || '';
-        const message = [title, description].filter(Boolean).join(' ');
+        const message = button.dataset.tts;
+
+        console.log('Speaking option:', message);
 
         if (!message) {
             return;
@@ -45,11 +45,83 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const menuButtons = document.querySelectorAll('.menu-btn');
+    const instructionsDialog = document.getElementById('instruccions-dialog');
+    const closeDialogButton = document.querySelector('.instructions-dialog__close');
+
+    const setActiveButton = (button) => {
+        menuButtons.forEach((menuButton) => {
+            menuButton.classList.remove('is-active');
+            menuButton.removeAttribute('aria-current');
+        });
+
+        button.classList.add('is-active');
+        button.setAttribute('aria-current', 'true');
+    };
+
+    const moveFocus = (currentButton, direction) => {
+        const buttons = Array.from(menuButtons);
+        const currentIndex = buttons.indexOf(currentButton);
+
+        if (currentIndex === -1) {
+            return;
+        }
+
+        const nextIndex = (currentIndex + direction + buttons.length) % buttons.length;
+        buttons[nextIndex].focus();
+    };
 
     menuButtons.forEach((button) => {
-        button.addEventListener('mouseenter', () => speakOption(button));
-        button.addEventListener('focus', () => speakOption(button));
+        button.addEventListener('focus', () => {
+            setActiveButton(button);
+            speakOption(button);
+        });
+        button.addEventListener('blur', () => {
+            button.classList.remove('is-active');
+            button.removeAttribute('aria-current');
+        });
+        button.addEventListener('keydown', (event) => {
+            const key = event.key.toLowerCase();
+
+            if (key === 'arrowdown' || key === 's' || key === 'arrowright' || key === 'd') {
+                event.preventDefault();
+                moveFocus(button, 1);
+            }
+
+            if (key === 'arrowup' || key === 'w' || key === 'arrowleft' || key === 'a') {
+                event.preventDefault();
+                moveFocus(button, -1);
+            }
+        });
     });
+
+    document.addEventListener('keydown', (event) => {
+        if (instructionsDialog && instructionsDialog.open) {
+            return;
+        }
+
+        const key = event.key.toLowerCase();
+        const activeElement = document.activeElement;
+
+        if (!activeElement || !activeElement.classList || !activeElement.classList.contains('menu-btn')) {
+            return;
+        }
+
+        if (key === 'arrowdown' || key === 's' || key === 'arrowright' || key === 'd') {
+            event.preventDefault();
+            moveFocus(activeElement, 1);
+        }
+
+        if (key === 'arrowup' || key === 'w' || key === 'arrowleft' || key === 'a') {
+            event.preventDefault();
+            moveFocus(activeElement, -1);
+        }
+    });
+
+    if (instructionsDialog && closeDialogButton) {
+        closeDialogButton.addEventListener('click', () => {
+            instructionsDialog.close();
+        });
+    }
 
     if (window.speechSynthesis.getVoices().length > 0) {
         speakInstructions();
@@ -64,3 +136,30 @@ document.addEventListener('DOMContentLoaded', () => {
     window.speechSynthesis.addEventListener('voiceschanged', voicesReady);
     setTimeout(speakInstructions, 250);
 });
+
+function navigateTo(page) {
+    switch (page) {
+        case 'continuar':
+            //mirar localStorage per veure quin nivell s'ha de continuar
+            const currentLevel = localStorage.getItem('currentLevel') || '1';
+            window.location.href = `nivells${currentLevel}.html`;
+            break;
+        case 'nivells':
+            window.location.href = 'nivells.html';
+            break;
+        case 'instruccions':
+            //obrir el dialog d'instruccions
+            const dialog = document.getElementById('instruccions-dialog');
+            if (dialog) {
+                dialog.showModal();
+                const closeButton = dialog.querySelector('.instructions-dialog__close');
+                if (closeButton) {
+                    closeButton.focus();
+                }
+            }
+
+            break;
+        default:
+            console.error('Unknown page:', page);
+    };
+}

@@ -11,73 +11,41 @@
 
     <main class="menu-container">
         <header class="menu-header">
-            <h1 id="main-title" tabindex="0" data-tts="Benvingut a Introspoken. Menú principal.">Introspoken</h1>
+            <h1 id="main-title" data-tts="Benvingut a Introspoken. Menú principal.">Introspoken</h1>
         </header>
 
         <section class="menu-story" aria-labelledby="how-to-play-title">
-            <h2 id="how-to-play-title" tabindex="0" data-tts="Com es fa servir: Prem Tabulador per moure't entre opcions i Enter o Espai per activar-les. No cal mirar la pantalla: l'experiència és principalment sonora.">Com es fa servir</h2>
-            <p>Prem <span class="kbd">Tab</span> per moure't entre opcions i <span class="kbd">Enter</span> o <span class="kbd">Espai</span> per activar-les. No cal mirar la pantalla: l'experiència és principalment sonora.</p>
-        </section>
-
-        <section class="menu-story" aria-labelledby="story-title">
-            <h2 id="story-title" tabindex="0" data-tts="Què hi trobaràs: Sons de la natura explicats amb paraules clares perquè puguis imaginar l'entorn amb tranquil·litat, acabant amb una prova final interactiva i relaxant.">Què hi trobaràs</h2>
-            <p>Sons de fulles, ocells, aigua, vent i altres elements del bosc, explicats amb paraules clares perquè puguis imaginar l'entorn amb tranquil·litat.</p>
+            <h2 id="how-to-play-title" data-tts="Com es fa servir: Prem les fletxes o les tecles W, A, S i D per moure't entre opcions i Enter o Espai per activar-les. No cal mirar la pantalla: l'experiència és principalment sonora.">Com es fa servir</h2>
+            <p>Prem les <span class="kbd">fletxes</span> o les tecles <span class="kbd">W</span> <span class="kbd">A</span> <span class="kbd">S</span> <span class="kbd">D</span> per moure't entre opcions i <span class="kbd">Enter</span> o <span class="kbd">Espai</span> per activar-les. No cal mirar la pantalla: l'experiència és principalment sonora.</p>
         </section>
 
         <nav class="menu-options">
-            <button class="menu-btn o-aprenentatge" data-tts="Opció 1: Continuar Nivells. Segueix jugant i aprenent des del nivell on et vas quedar.">
+            <button type="button" class="menu-btn o-aprenentatge" onClick="navigateTo('continuar')" data-tts="Opció 1: Continuar el nivell. Segueix jugant i aprenent des del nivell on et vas quedar.">
                 <span class="text">1. Continua el Nivell</span>
-                <span class="subtext">Torna a l'aprenentatge progressiu d'elements de la natura on vas deixar-ho.</span>
+                <span class="subtext">Segueix jugant i aprenent des del nivell on et vas quedar.</span>
             </button>
 
-            <button class="menu-btn o-repte" data-tts="Opció 2: El Repte Final. Nivell 10. Escolta el bosc, descobreix els elements apresos i relaxa't amb el so.">
+            <button type="button" class="menu-btn o-repte" onClick="navigateTo('nivells')" data-tts="Opció 2: Veure tots els nivells disponibles.">
                 <span class="text">2. Nivells</span>
-                <span class="subtext">Escolta un paisatge sonor complet, digues quins elements hi ha i deixa't portar per la calma.</span>
+                <span class="subtext">Veure tots el nivells disponibles</span>
             </button>
 
-            <button class="menu-btn o-ajuda" data-tts="Opció 3: Instruccions de veu. Escolta la guia pas a pas sobre el funcionament del joc.">
-                <span class="text">3. Instruccions de Veu</span>
+            <button type="button" class="menu-btn o-ajuda" onClick="navigateTo('instruccions')" data-tts="Opció 3: Instruccions. Escolta la guia pas a pas sobre el funcionament del joc.">
+                <span class="text">3. Instruccions</span>
                 <span class="subtext">Escolta una explicació detallada sobre com t'ajudarem a recrear el bosc a la teva ment.</span>
             </button>
         </nav>
 
-        <footer class="menu-footer">
-            <p tabindex="0" data-tts="Objectiu: aprendre la natura amb sons i paraules, i acabar amb una escolta final que també ajudi a tranquil·litzar. El disseny visual és secundari; el centre és l'àudio.">Objectiu: aprendre la natura amb sons i paraules, i acabar amb una escolta final que també ajudi a tranquil·litzar. El disseny visual és secundari; el centre és l'àudio.</p>
-        </footer>
     </main>
 
-    <script>
-        const elementsVeu = document.querySelectorAll('[data-tts]');
-
-        function parlar(text) {
-            window.speechSynthesis.cancel(); // Atura qualsevol veu activa
-            const missatge = new SpeechSynthesisUtterance(text);
-            missatge.lang = 'ca-ES'; // Configurat en català
-            missatge.rate = 1.1;     // Velocitat lleugerament fluida
-            window.speechSynthesis.speak(missatge);
-        }
-
-        elementsVeu.forEach(element => {
-            const textLlegir = element.getAttribute('data-tts');
-
-            // Escolta en passar el ratolí
-            element.addEventListener('mouseenter', () => parlar(textLlegir));
-            
-            // Escolta en seleccionar amb el teclat (Tab)
-            element.addEventListener('focus', () => parlar(textLlegir));
-
-            // Resposta interactiva en fer clic / Enter
-            element.addEventListener('click', () => {
-                if (element.classList.contains('o-aprenentatge')) {
-                    parlar("Carregant els teus nivells... Tornem al bosc!");
-                } else if (element.classList.contains('o-repte')) {
-                    parlar("Començant la prova final del bosc. Tanca els ulls, respira i intenta reconèixer els elements.");
-                } else if (element.classList.contains('o-ajuda')) {
-                    parlar("Instruccions del joc: Cada nivell et guiarà per un racó de la natura amb sons i descripcions tàctils per crear una imatge en la teva ment. Al final del camí, el nivell 10 serà una prova on hauràs de trobar els sons amagats mentre et relaxes.");
-                }
-            });
-        });
-    </script>
+    <dialog id="instruccions-dialog" class="instructions-dialog" aria-labelledby="instruccions-title" aria-describedby="instruccions-desc">
+        <form method="dialog" class="instructions-dialog__content">
+            <h2 id="instruccions-title">Instruccions</h2>
+            <p id="instruccions-desc">Prem les fletxes o les tecles W, A, S i D per moure't només entre les opcions del menú.</p>
+            <p>En aquest joc per aprendre sobre la natura, trobaràs diversos nivells per aprendre d'aquesta, fent que el teu coneixement sobre la natura millori. A partir de descripcions i sons sabràs més sobre la natura</p>
+            <button type="submit" class="instructions-dialog__close">Tancar</button>
+        </form>
+    </dialog>
 
 </body>
 </html>

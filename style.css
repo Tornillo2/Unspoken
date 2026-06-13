@@ -71,7 +71,7 @@ body {
 .menu-options {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Espai entre botons perquè no es cliqui per error */
+    gap: 40px; /* Espai entre botons perquè no es cliqui per error */
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -129,6 +129,12 @@ body {
     outline: none; /* Treu la vora per defecte del navegador */
 }
 
+.menu-btn.is-active {
+    transform: scale(1.04);
+    outline: 4px solid rgba(244, 249, 244, 0.8);
+    outline-offset: 3px;
+}
+
 /* Icones grans (Mantingut) */
 .menu-btn .icon {
     font-size: 2.5rem;
@@ -142,6 +148,7 @@ body {
 /* Textos de dins el botó (Mantingut) */
 .menu-btn .text {
     font-size: 1.4rem;
+    margin-right: 15px;
     font-weight: bold;
     display: block;
 }
@@ -172,4 +179,54 @@ body {
     line-height: 1.4;
     color: #8da38f;
     margin: 0;
+}
+
+.instructions-dialog {
+    border: 2px solid #4a8a59;
+    border-radius: 18px;
+    padding: 0;
+    max-width: min(92vw, 640px);
+    width: 100%;
+    background: #102316;
+    color: #f4f9f4;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+.instructions-dialog::backdrop {
+    background: rgba(4, 10, 6, 0.75);
+}
+
+.instructions-dialog__content {
+    padding: 24px;
+}
+
+.instructions-dialog__content h2 {
+    margin: 0 0 12px;
+    color: #85e39d;
+    font-size: 1.5rem;
+}
+
+.instructions-dialog__content p {
+    margin: 0 0 14px;
+    line-height: 1.6;
+    color: #cbdccb;
+    font-size: 1.02rem;
+}
+
+.instructions-dialog__close {
+    border: 2px solid #4a8a59;
+    border-radius: 12px;
+    padding: 12px 18px;
+    background: #1b3822;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.instructions-dialog__close:hover,
+.instructions-dialog__close:focus-visible {
+    background: #285834;
+    border-color: #85e39d;
+    outline: none;
 }
