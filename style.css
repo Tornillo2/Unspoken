@@ -1,196 +1,82 @@
 /* Configuració general i colors de la natura */
-:root {
-    --bg-1: #07140b;
-    --bg-2: #102716;
-    --panel: rgba(17, 39, 24, 0.9);
-    --panel-strong: #173422;
-    --text: #f3f8f2;
-    --muted: #c8d9c5;
-    --accent: #8fe0a1;
-    --accent-strong: #c7ffcf;
-    --border: #3f7a50;
-    --shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-}
-
-* {
-    box-sizing: border-box;
-}
-
 body {
     margin: 0;
-    min-height: 100vh;
-    padding: 24px;
+    padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: var(--text);
-    background:
-        radial-gradient(circle at top, rgba(143, 224, 161, 0.18), transparent 30%),
-        linear-gradient(160deg, var(--bg-1), var(--bg-2));
+    background-color: #122315; /* Verd bosc molt fosc (bon contrast) */
+    color: #f4f9f4; /* Blanc trencat suau per no cansar la vista */
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
 }
 
 /* Contenidor del Menú */
 .menu-container {
-    width: min(100%, 760px);
-    padding: 28px;
-    border-radius: 28px;
-    background: var(--panel);
-    border: 1px solid rgba(143, 224, 161, 0.16);
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(8px);
-}
-
-.menu-header {
-    text-align: left;
-}
-
-.eyebrow {
-    margin: 0 0 10px;
-    font-size: 0.95rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 700;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    text-align: center;
 }
 
 .menu-header h1 {
-    margin: 0;
-    font-size: clamp(2.4rem, 5vw, 4rem);
-    line-height: 1.05;
-    color: var(--accent-strong);
+    font-size: 2.5rem;
+    color: #85e39d; /* Verd brillant per ressaltar el títol */
+    margin-bottom: 10px;
 }
 
-.intro {
-    margin: 16px 0 0;
-    font-size: 1.15rem;
-    line-height: 1.7;
-    color: var(--muted);
-    max-width: 62ch;
-}
-
-.menu-story {
-    margin: 26px 0 30px;
-    padding: 18px 20px;
-    border-left: 5px solid var(--accent);
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.03);
-}
-
-.menu-story h2 {
-    margin: 0 0 8px;
-    font-size: 1.25rem;
-    color: var(--text);
-}
-
-.menu-story p,
-.menu-footer p {
-    margin: 0;
-    font-size: 1.03rem;
-    line-height: 1.7;
-    color: var(--muted);
-}
-
-.kbd {
-    display: inline-block;
-    padding: 0.1rem 0.45rem;
-    border: 1px solid rgba(143, 224, 161, 0.4);
-    border-bottom-width: 2px;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--accent-strong);
-    font-weight: 700;
+.menu-header p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    color: #cbdccb;
 }
 
 /* Estructura dels botons */
 .menu-options {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espai entre botons perquè no es cliqui per error */
 }
 
 /* Estil de cada botó (Gran i fàcil de clicar) */
 .menu-btn {
-    width: 100%;
-    border: 2px solid var(--border);
-    border-radius: 22px;
-    background: linear-gradient(180deg, rgba(23, 52, 34, 0.95), rgba(18, 39, 25, 0.95));
-    color: var(--text);
-    padding: 20px 22px;
+    background-color: #1b3822; /* Verd fosc */
+    border: 3px solid #387648; /* Vora marcada */
+    border-radius: 15px;
+    color: #ffffff;
+    padding: 20px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     text-align: left;
     cursor: pointer;
-    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
-}
-
-.menu-btn:hover,
-.menu-btn:focus-visible {
-    transform: translateY(-2px);
-    border-color: var(--accent);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
-    outline: none;
-}
-
-.menu-btn:focus-visible {
-    box-shadow: 0 0 0 4px rgba(143, 224, 161, 0.28), 0 12px 24px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+    width: 100%;
 }
 
 /* Icones grans */
 .menu-btn .icon {
-    flex: 0 0 auto;
-    font-size: 2.3rem;
-    margin-right: 18px;
-    line-height: 1;
+    font-size: 2.5rem;
+    margin-right: 20px;
 }
 
 /* Textos de dins el botó */
 .menu-btn .text {
-    font-size: 1.35rem;
-    font-weight: 700;
+    font-size: 1.4rem;
+    font-weight: bold;
     display: block;
-    margin-bottom: 4px;
 }
 
 .menu-btn .subtext {
     font-size: 1rem;
-    line-height: 1.55;
-    color: #b6d8bc;
+    color: #a3cfa3;
     display: block;
+    margin-top: 4px;
 }
 
-.menu-footer {
-    margin-top: 26px;
-    padding-top: 18px;
-    border-top: 1px solid rgba(143, 224, 161, 0.15);
-}
-
-@media (max-width: 640px) {
-    body {
-        padding: 14px;
-        align-items: flex-start;
-    }
-
-    .menu-container {
-        padding: 20px;
-        border-radius: 22px;
-    }
-
-    .menu-btn {
-        padding: 18px;
-    }
-
-    .menu-btn .icon {
-        margin-right: 14px;
-        font-size: 2rem;
-    }
-
-    .menu-btn .text {
-        font-size: 1.2rem;
-    }
-
-    .intro {
-        font-size: 1.05rem;
-    }
+/* Efecte visual quan es passa el ratolí o es selecciona (Focus) */
+.menu-btn:hover, .menu-btn:focus {
+    background-color: #285834;
+    border-color: #85e39d; /* La vora brilla en verd clar */
+    transform: scale(1.03); /* El botó s'engrandeix una mica */
+    outline: none; /* Treu la vora per defecte del navegador */
 }
