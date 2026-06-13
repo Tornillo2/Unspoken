@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
           actualitzarLectorsVeu();
           guardarProgresNivell();
           parlar("Correcte.", () => {
-            parlar("Passant al Nivell dos: Els Arbres.", () => {
+            parlar("Carregant el següent nivell.", () => {
               window.location.href = "../Nivell 2/index.html";
             });
           });
@@ -198,14 +198,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
 
-  if (btnTornar) {
-    btnTornar.addEventListener("click", () => {
-      audioRiu.pause();
-      parlar("Tornant al camí de nivells.", () => {
-        window.location.href = "../index.html";
-      });
-    });
-  }
 
   if (btnAudio) {
     btnAudio.addEventListener("click", () => {
@@ -235,13 +227,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if (btnSeguent) {
-    btnSeguent.addEventListener("click", () => {
-      parlar("Carregant el Nivell dos: Els Arbres.", () => {
-        window.location.href = "../Nivell 2/index.html";
-      });
-    });
-  }
 
   actualitzarLectorsVeu();
   carregarPreguntaAleatoria();
