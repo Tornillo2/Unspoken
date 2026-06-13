@@ -7,10 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const instructions = [
         "Benvingut a Introspoken.",
-        "Aquest joc està pensat per funcionar amb el teclat i l'àudio.",
+        "Aquest joc està pensat per funcionar amb el teclat i àudio.",
         "Prem les fletxes o les tecles W, A, S i D per moure't entre les opcions, i Enter o Espai per activar-les.",
         "En posar-te a cada opció, s'escoltarà una descripció de que consta.",
     ].join(' ');
+
+    // Variable de control per saber si ja hem dit la introducció
+    let instructionsSpoken = false;
 
     const speakInstructions = () => {
         window.speechSynthesis.cancel();
@@ -22,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         utterance.volume = 1;
 
         window.speechSynthesis.speak(utterance);
+        instructionsSpoken = true;
     };
 
     const speakOption = (button) => {
@@ -63,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentIndex = buttons.indexOf(currentButton);
 
         if (currentIndex === -1) {
+            buttons[0].focus();
             return;
         }
 
@@ -75,26 +80,24 @@ document.addEventListener('DOMContentLoaded', () => {
             setActiveButton(button);
             speakOption(button);
         });
+        
         button.addEventListener('blur', () => {
             button.classList.remove('is-active');
             button.removeAttribute('aria-current');
         });
-        button.addEventListener('keydown', (event) => {
-            const key = event.key.toLowerCase();
-
-            if (key === 'arrowdown' || key === 's' || key === 'arrowright' || key === 'd') {
-                event.preventDefault();
-                moveFocus(button, 1);
-            }
-
-            if (key === 'arrowup' || key === 'w' || key === 'arrowleft' || key === 'a') {
-                event.preventDefault();
-                moveFocus(button, -1);
-            }
-        });
     });
 
+    // UN SOL CONTROLADOR GLOBAL PEL TECLAT
     document.addEventListener('keydown', (event) => {
+        // 1. Si l'usuari prem qualsevol tecla per primer cop, es llegeixen les instruccions
+        // i s'atura l'esdeveniment perquè no es mogui el menú de cop ni es talli la veu.
+        if (!instructionsSpoken) {
+            event.preventDefault();
+            speakInstructions();
+            return; 
+        }
+
+        // Si el diàleg està obert, bloquegem el moviment del menú del fons
         if (instructionsDialog && instructionsDialog.open) {
             return;
         }
@@ -102,20 +105,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const key = event.key.toLowerCase();
         const activeElement = document.activeElement;
 
-        if (!activeElement || !activeElement.classList || !activeElement.classList.contains('menu-btn')) {
-            return;
-        }
+        const isNextKey = ['arrowdown', 's', 'arrowright', 'd'].includes(key);
+        const isPrevKey = ['arrowup', 'w', 'arrowleft', 'a'].includes(key);
 
-        if (key === 'arrowdown' || key === 's' || key === 'arrowright' || key === 'd') {
+        if (isNextKey) {
             event.preventDefault();
             moveFocus(activeElement, 1);
-        }
-
-        if (key === 'arrowup' || key === 'w' || key === 'arrowleft' || key === 'a') {
+        } else if (isPrevKey) {
             event.preventDefault();
             moveFocus(activeElement, -1);
         }
     });
+
+    // 2. Per si de cas l'usuari prefereix fer un clic a la pantalla abans de fer servir el teclat
+    document.addEventListener('click', () => {
+        if (!instructionsSpoken) {
+            speakInstructions();
+        }
+    }, { once: true }); // Aquest "once" fa que l'esdeveniment s'elimini tot sol un cop utilitzat
 
     if (instructionsDialog && closeDialogButton) {
         closeDialogButton.addEventListener('click', () => {
@@ -123,24 +130,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (window.speechSynthesis.getVoices().length > 0) {
-        speakInstructions();
-        return;
+    //mirar si estem en partida o si hem de començar de nou
+    const currentGameID = localStorage.getItem('currentGameID');
+    if (currentGameID) {
+        //agafar les dades de la partida i continuar
+        $.get(`https://fun.codelearn.cat/hackathon/game/get_progress?game_id=${currentGameID}`, function(data) {
+            // Process the game data
+        });
     }
-
-    const voicesReady = () => {
-        speakInstructions();
-        window.speechSynthesis.removeEventListener('voiceschanged', voicesReady);
-    };
-
-    window.speechSynthesis.addEventListener('voiceschanged', voicesReady);
-    setTimeout(speakInstructions, 250);
-});
 
 function navigateTo(page) {
     switch (page) {
         case 'continuar':
-            //mirar localStorage per veure quin nivell s'ha de continuar
             const currentLevel = localStorage.getItem('currentLevel') || '1';
             window.location.href = `nivells${currentLevel}.html`;
             break;
@@ -148,7 +149,6 @@ function navigateTo(page) {
             window.location.href = 'nivells';
             break;
         case 'instruccions':
-            //obrir el dialog d'instruccions
             const dialog = document.getElementById('instruccions-dialog');
             if (dialog) {
                 dialog.showModal();
@@ -157,9 +157,8 @@ function navigateTo(page) {
                     closeButton.focus();
                 }
             }
-
             break;
         default:
             console.error('Unknown page:', page);
-    };
+    }
 }
