@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introspoken - Nivell 2: Els Arbres</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="game-container">
+        <header class="game-header">
+            <button class="btn-tornar" data-tts="Tornar al camí de nivells." onclick="window.location.href='/Nivells/index.html'">⬅️ Camí</button>
+            <h1 tabindex="0" data-tts="Nivell dos: Els Arbres.">Nivell 2: Els Arbres</h1>
+        </header>
+
+        <section class="description-card" tabindex="0" data-tts="Camines sobre un mantell de fulles seques que cruixen sota els teus peus amb un so trencadís. Al teu voltant, troncs gruixuts i rústics s'alcen cap al cel. Una brisa suau bufa constantment, fent que les capçades dels arbres es balancegin i les fulles xiuxiuegin una melodia verda i acollidora.">
+            <h2>Imagina l'entorn:</h2>
+            <p>Camines sobre un mantell de <strong>fulles seques que cruixen</strong> sota els teus peus. Al teu voltant, troncs gruixuts s'alcen cap al cel.</p>
+            <p>Una brisa suau fa que les capçades dels arbres es balancegin i les fulles <strong>xiuxiuegin una melodia</strong> acollidora.</p>
+        </section>
+
+        <section class="audio-controls">
+            <button id="btn-audio" class="btn-play-arbres" data-tts="Botó de so. Prem per escoltar el vent entre els arbres.">
+                <span class="icon">🍃</span> 
+                <span class="text">Escotar el Bosc</span>
+            </button>
+        </section>
+
+        <section id="zona-preguntes" class="quiz-section">
+            <h2 id="titol-pregunta" tabindex="0" data-tts="">Pregunta del nivell:</h2>
+            <p id="pregunta-text" class="pregunta-text"></p>
+            
+            <div id="quiz-options" class="quiz-options">
+                </div>
+        </section>
+
+        <section id="zona-seguent" style="display: none; margin-top: 30px;">
+            <button id="btn-seguent" class="btn-seg" data-tts="Felicitats! Has encertat. Prem aquí per tornar al camí de nivells." onclick="window.location.href='nivells.html'">Anar al Nivell 3 ➡️</button>
+        </section>
+
+        <audio id="sound-effect" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" loop></audio>
+    </main>
+
+    <script>
+        // Elements de la interfície
+        const btnAudio = document.getElementById('btn-audio');
+        const àudioBosc = document.getElementById('sound-effect');
+        const zonaSeguent = document.getElementById('zona-seguent');
+        const titolPregunta = document.getElementById('titol-pregunta');
+        const textPregunta = document.getElementById('pregunta-text');
+        const contenidorOpcions = document.getElementById('quiz-options');
+
+        let reproduint = false;
+
+        // Banc de preguntes aleatòries per al Nivell 2
+        const preguntesNivell2 = [
+            {
+                pregunta: "Què és el que cruix sota els teus peus?",
+                opcions: [
+                    { text: "A) Pedres petites i sorra de riu.", correcta: false, tts: "Opció A: Pedres petites i sorra de riu." },
+                    { text: "B) Branques grosses que es trenquen.", correcta: false, tts: "Opció B: Branques grosses que es trenquen." },
+                    { text: "C) Un mantell de fulles seques.", correcta: true, tts: "Opció C: Un mantell de fulles seques." }
+                ]
+            },
+            {
+                pregunta: "Com són els troncs dels arbres que t'envolten?",
+                opcions: [
+                    { text: "A) Són troncs gruixuts i rústics que s'alcen cap al cel.", correcta: true, tts: "Opció A: Són troncs gruixuts i rústics que s'alcen cap al cel." },
+                    { text: "B) Són branques fines, primes i gairebé transparents.", correcta: false, tts: "Opció B: Són branques fines, primes i gairebé transparents." },
+                    { text: "C) Són plantes baixes i arbustos sense fusta.", correcta: false, tts: "Opció C: Són plantes baixes i arbustos sense fusta." }
+                ]
+            },
+            {
+                pregunta: "Què fa que les capçades dels arbres es balancegin?",
+                opcions: [
+                    { text: "A) El pes dels ocells que hi fan nius.", correcta: false, tts: "Opció A: El pes dels ocells que hi fan nius." },
+                    { text: "B) Una brisa suau que bufa constantment.", correcta: true, tts: "Opció B: Una brisa suau que bufa constantment." },
+                    { text: "C) La pluja forta d'una tempesta de muntanya.", correcta: false, tts: "Opció C: La pluja forta d'una tempesta de muntanya." }
+                ]
+            }
+        ];
+
+        // Motor de veu (TTS)
+        function parlar(text, callback) {
+            window.speechSynthesis.cancel();
+            const missatge = new SpeechSynthesisUtterance(text);
+            missatge.lang = 'ca-ES';
+            missatge.rate = 1.0;
+            if (callback) missatge.onend = callback;
+            window.speechSynthesis.speak(missatge);
+        }
+
+        // Assigna els esdeveniments de veu (focus i ratolí) a tots els elements amb data-tts
+        function actualitzarLectorsVeu() {
+            const totsElements = document.querySelectorAll('[data-tts]');
+            totsElements.forEach(element => {
+                element.onmouseenter = () => { parlar(element.getAttribute('data-tts')); };
+                element.onfocus = () => { parlar(element.getAttribute('data-tts')); };
+            });
+        }
+
+        // Funció per triar i carregar una pregunta a l'atzar
+        function carregarPreguntaAleatoria() {
+            const indexAleatori = Math.floor(Math.random() * preguntesNivell2.length);
+            const dadesPregunta = preguntesNivell2[indexAleatori];
+
+            textPregunta.innerText = dadesPregunta.pregunta;
+            titolPregunta.setAttribute('data-tts', "Pregunta del nivell: " + dadesPregunta.pregunta);
+            contenidorOpcions.innerHTML = "";
+
+            dadesPregunta.opcions.forEach(opcio => {
+                const boto = document.createElement('button');
+                boto.className = "btn-resposta";
+                boto.innerText = opcio.text;
+                boto.setAttribute('data-tts', opcio.tts);
+
+                boto.addEventListener('click', () => {
+                    // Desactivem els botons per evitar clics duplicats
+                    const botons = contenidorOpcions.querySelectorAll('.btn-resposta');
+                    botons.forEach(b => b.disabled = true);
+
+                    if (opcio.correcta) {
+                        boto.style.backgroundColor = "#1e8449";
+                        boto.style.borderColor = "#52be80";
+                        boto.style.color = "#ffffff";
+                        zonaSeguent.style.display = "block";
+                        actualitzarLectorsVeu();
+                        parlar("Molt bé! Resposta correcta. Prem el botó de baix per continuar el camí.");
+                    } else {
+                        boto.style.backgroundColor = "#641e1e";
+                        boto.style.borderColor = "#ec7063";
+                        boto.style.color = "#ffffff";
+                        parlar("Aquesta opció és incorrecta. Recarrega la pàgina per rebre una altra pregunta.");
+                    }
+                });
+
+                contenidorOpcions.appendChild(boto);
+            });
+
+            // Activem el lector de veu per a la pregunta i les opcions acabades de crear
+            actualitzarLectorsVeu();
+        }
+
+        // Control de la reproducció del so del bosc
+        btnAudio.addEventListener('click', () => {
+            if (!reproduint) {
+                àudioBosc.play();
+                btnAudio.querySelector('.text').innerText = "Aturar el Bosc";
+                btnAudio.querySelector('.icon').innerText = "⏹️";
+                btnAudio.setAttribute('data-tts', "Botó de so. Prem per aturar el so del bosc.");
+                reproduint = true;
+                parlar("Iniciant el so del bosc. Escolta el vent entre els arbres.");
+            } else {
+                àudioBosc.pause();
+                btnAudio.querySelector('.text').innerText = "Escotar el Bosc";
+                btnAudio.querySelector('.icon').innerText = "🍃";
+                btnAudio.setAttribute('data-tts', "Botó de so. Prem per escoltar el vent entre els arbres.");
+                reproduint = false;
+                parlar("So del bosc aturat.");
+            }
+        });
+
+        // Inicialització al carregar la pàgina
+        window.onload = () => {
+            carregarPreguntaAleatoria();
+        };
+    </script>
+</body>
+</html>
