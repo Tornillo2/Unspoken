@@ -19,31 +19,31 @@ document.addEventListener("DOMContentLoaded", () => {
   let reproduint = false;
 
   const preguntesNivell1 = [
-            {
-                pregunta: "Quin ocell fa un repicar rítmic sobre l'escorça d'un pi?",
-                opcions: [
-                    { text: "A) Una àliga daurada que sobrevola el bosc.", correcta: false, tts: "Opció A: Una àliga daurada que sobrevola el bosc." },
-                    { text: "B) Un picot fuster.", correcta: true, tts: "Opció B: Un picot fuster." },
-                    { text: "C) Un mussol que s'ha despertat de nit.", correcta: false, tts: "Opció C: Un mussol que s'ha despertat de nit." }
-                ]
-            },
-            {
-                pregunta: "Com es descriu el cant d'aquests animals?",
-                opcions: [
-                    { text: "A) És un cant alegre i variat, amb refilets i piulades.", correcta: true, tts: "Opció A: És un cant alegre i variat, amb refilets i piulades." },
-                    { text: "B) Són ronsaments i crits de por.", correcta: false, tts: "Opció B: Són ronsaments i crits de por." },
-                    { text: "C) És un silenci absolut sense cap mena de so.", correcta: false, tts: "Opció C: És un silenci absolut sense cap mena de so." }
-                ]
-            },
-            {
-                pregunta: "A qui es refereix el text com els 'músics del bosc'?",
-                opcions: [
-                    { text: "A) Al soroll que fan les branques seques en caure.", correcta: false, tts: "Opció A: Al soroll que fan les branques seques en caure." },
-                    { text: "B) Al pas dels excursionistes que caminen.", correcta: false, tts: "Opció B: Al pas dels excursionistes que caminen." },
-                    { text: "C) Als ocells que saluden el nou dia.", correcta: true, tts: "Opció C: Als ocells que saluden el nou dia." }
-                ]
-            }
-        ];
+  {
+    "pregunta": "Quin tipus de so característic s'atribueix al cérvol en aquest entorn?",
+    "opcions": [
+      { "text": "A) Un refilet fluixet i molt agut igual que un ocell.", "correcta": false, "tts": "Opció A: Un refilet fluixet i molt agut igual que un ocell." },
+      { "text": "B) Un bram potent que ressona entre els arbres.", "correcta": true, "tts": "Opció B: Un bram potent que ressona entre els arbres." },
+      { "text": "C) El so del silenci, ja que no fa mai cap soroll.", "correcta": false, "tts": "Opció C: El so del silenci, ja que no fa mai cap soroll." }
+    ]
+  },
+  {
+    "pregunta": "Què provoca el trencament i cruixir de branques gruixudes?",
+    "opcions": [
+      { "text": "A) Les trepitjades fortes d'un gran os en moure's.", "correcta": true, "tts": "Opció A: Les trepitjades fortes d'un gran os en moure's." },
+      { "text": "B) El vent suau que fa moure només les fulles.", "correcta": false, "tts": "Opció B: El vent suau que fa moure només les fulles." },
+      { "text": "C) Unes petites formigues caminant pel tronc.", "correcta": false, "tts": "Opció C: Unes petites formigues caminant pel tronc." }
+    ]
+  },
+  {
+    "pregunta": "Com són els arbres d'aquesta part del bosc on viuen?",
+    "opcions": [
+      { "text": "A) Són plantes molt petites plantades fa pocs dies.", "correcta": false, "tts": "Opció A: Són plantes molt petites plantades fa pocs dies." },
+      { "text": "B) No hi ha cap arbre, és una zona desèrtica de sorra.", "correcta": false, "tts": "Opció B: No hi ha cap arbre, és una zona desèrtica de sorra." },
+      { "text": "C) Són arbres centenaris en una vegetació espessa.", "correcta": true, "tts": "Opció C: Són arbres centenaris en una vegetació espessa." }
+    ]
+  }
+];
 
   function parlar(text, callback) {
     window.speechSynthesis.cancel();
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
           guardarProgresNivell();
           parlar("Correcte.", () => {
             parlar("Carregant el següent nivell.", () => {
-              window.location.href = "../Nivell 4/index.html";
+              window.location.href = "../Nivell 8/index.html";
             });
           });
         } else {
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function guardarProgresNivell() {
-    const nivellActual = 4;
+    const nivellActual = 8;
     $.ajax({
       url: "https://fun.codelearn.cat/hackathon/game/store_progress",
       type: "POST",
@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (btnSeguent) {
     btnSeguent.addEventListener("click", () => {
       parlar("Carregant el següent nivell.", () => {
-        window.location.href = "../Nivell 4/index.html";
+        window.location.href = "../Nivell 8/index.html";
       });
     });
   }

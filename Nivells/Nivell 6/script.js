@@ -19,31 +19,31 @@ document.addEventListener("DOMContentLoaded", () => {
   let reproduint = false;
 
   const preguntesNivell1 = [
-            {
-                pregunta: "Quin ocell fa un repicar rítmic sobre l'escorça d'un pi?",
-                opcions: [
-                    { text: "A) Una àliga daurada que sobrevola el bosc.", correcta: false, tts: "Opció A: Una àliga daurada que sobrevola el bosc." },
-                    { text: "B) Un picot fuster.", correcta: true, tts: "Opció B: Un picot fuster." },
-                    { text: "C) Un mussol que s'ha despertat de nit.", correcta: false, tts: "Opció C: Un mussol que s'ha despertat de nit." }
-                ]
-            },
-            {
-                pregunta: "Com es descriu el cant d'aquests animals?",
-                opcions: [
-                    { text: "A) És un cant alegre i variat, amb refilets i piulades.", correcta: true, tts: "Opció A: És un cant alegre i variat, amb refilets i piulades." },
-                    { text: "B) Són ronsaments i crits de por.", correcta: false, tts: "Opció B: Són ronsaments i crits de por." },
-                    { text: "C) És un silenci absolut sense cap mena de so.", correcta: false, tts: "Opció C: És un silenci absolut sense cap mena de so." }
-                ]
-            },
-            {
-                pregunta: "A qui es refereix el text com els 'músics del bosc'?",
-                opcions: [
-                    { text: "A) Al soroll que fan les branques seques en caure.", correcta: false, tts: "Opció A: Al soroll que fan les branques seques en caure." },
-                    { text: "B) Al pas dels excursionistes que caminen.", correcta: false, tts: "Opció B: Al pas dels excursionistes que caminen." },
-                    { text: "C) Als ocells que saluden el nou dia.", correcta: true, tts: "Opció C: Als ocells que saluden el nou dia." }
-                ]
-            }
-        ];
+  {
+    "pregunta": "Quin animal es pot escoltar cantant de lluny en aquest bosc?",
+    "opcions": [
+      { "text": "A) Un ocell fuster picant un pi de dia.", "correcta": false, "tts": "Opció A: Un ocell fuster picant un pi de dia." },
+      { "text": "B) Un mussol llunyà amagat entre les ombres.", "correcta": true, "tts": "Opció B: Un mussol llunyà amagat entre les ombres." },
+      { "text": "C) Una àliga volant sota el sol.", "correcta": false, "tts": "Opció C: Una àliga volant sota el sol." }
+    ]
+  },
+  {
+    "pregunta": "Què il·lumina el camí del jugador en aquest nivell?",
+    "opcions": [
+      { "text": "A) La llum clara de la lluna a la nit.", "correcta": true, "tts": "Opció A: La llum clara de la lluna a la nit." },
+      { "text": "B) Els raigs d'un sol molt potent de migdia.", "correcta": false, "tts": "Opció B: Els raigs d'un sol molt potent de migdia." },
+      { "text": "C) Un munt de llums de colors d'una ciutat.", "correcta": false, "tts": "Opció C: Un munt de llums de colors d'una ciutat." }
+    ]
+  },
+  {
+    "pregunta": "Com es descriu l'atmosfera d'aquest bosc a l'alta nit?",
+    "opcions": [
+      { "text": "A) Molt sorollosa plena de cotxes i fums.", "correcta": false, "tts": "Opció A: Molt sorollosa plena de cotxes i fums." },
+      { "text": "B) Un espai completament obert i sense cap arbre.", "correcta": false, "tts": "Opció B: Un espai completament obert i sense cap arbre." },
+      { "text": "C) Un entorn fosc, misteriós i ple d'ombres.", "correcta": true, "tts": "Opció C: Un entorn fosc, misteriós i ple d'ombres." }
+    ]
+  }
+];
 
   function parlar(text, callback) {
     window.speechSynthesis.cancel();
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
           guardarProgresNivell();
           parlar("Correcte.", () => {
             parlar("Carregant el següent nivell.", () => {
-              window.location.href = "../Nivell 4/index.html";
+              window.location.href = "../Nivell 7/index.html";
             });
           });
         } else {
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function guardarProgresNivell() {
-    const nivellActual = 4;
+    const nivellActual = 7;
     $.ajax({
       url: "https://fun.codelearn.cat/hackathon/game/store_progress",
       type: "POST",
@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (btnSeguent) {
     btnSeguent.addEventListener("click", () => {
       parlar("Carregant el següent nivell.", () => {
-        window.location.href = "../Nivell 4/index.html";
+        window.location.href = "../Nivell 7/index.html";
       });
     });
   }

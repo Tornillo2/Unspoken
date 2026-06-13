@@ -19,31 +19,31 @@ document.addEventListener("DOMContentLoaded", () => {
   let reproduint = false;
 
   const preguntesNivell1 = [
-            {
-                pregunta: "Quin ocell fa un repicar rítmic sobre l'escorça d'un pi?",
-                opcions: [
-                    { text: "A) Una àliga daurada que sobrevola el bosc.", correcta: false, tts: "Opció A: Una àliga daurada que sobrevola el bosc." },
-                    { text: "B) Un picot fuster.", correcta: true, tts: "Opció B: Un picot fuster." },
-                    { text: "C) Un mussol que s'ha despertat de nit.", correcta: false, tts: "Opció C: Un mussol que s'ha despertat de nit." }
-                ]
-            },
-            {
-                pregunta: "Com es descriu el cant d'aquests animals?",
-                opcions: [
-                    { text: "A) És un cant alegre i variat, amb refilets i piulades.", correcta: true, tts: "Opció A: És un cant alegre i variat, amb refilets i piulades." },
-                    { text: "B) Són ronsaments i crits de por.", correcta: false, tts: "Opció B: Són ronsaments i crits de por." },
-                    { text: "C) És un silenci absolut sense cap mena de so.", correcta: false, tts: "Opció C: És un silenci absolut sense cap mena de so." }
-                ]
-            },
-            {
-                pregunta: "A qui es refereix el text com els 'músics del bosc'?",
-                opcions: [
-                    { text: "A) Al soroll que fan les branques seques en caure.", correcta: false, tts: "Opció A: Al soroll que fan les branques seques en caure." },
-                    { text: "B) Al pas dels excursionistes que caminen.", correcta: false, tts: "Opció B: Al pas dels excursionistes que caminen." },
-                    { text: "C) Als ocells que saluden el nou dia.", correcta: true, tts: "Opció C: Als ocells que saluden el nou dia." }
-                ]
-            }
-        ];
+  {
+    "pregunta": "Com es descriu le so de la pluja intensa sobre les fulles?",
+    "opcions": [
+      { "text": "A) Com si fossin milers de tambors repicant.", "correcta": true, "tts": "Opció A: Com si fossin milers de tambors repicant." },
+      { "text": "B) Com un silenci absolut i pausat.", "correcta": false, "tts": "Opció B: Com un silenci absolut i pausat." },
+      { "text": "C) Com el cant d'un grill amagat a l'herba.", "correcta": false, "tts": "Opció C: Com el cant d'un grill amagat a l'herba." }
+    ]
+  },
+  {
+    "pregunta": "Què passa amb la temperatura just abans de la tempesta?",
+    "opcions": [
+      { "text": "A) Comença a fer una calor extrema que crema el bosc.", "correcta": false, "tts": "Opció A: Comença a fer una calor extrema que crema el bosc." },
+      { "text": "B) L'aire es torna pesat i no es mou gens.", "correcta": false, "tts": "Opció B: L'aire es torna pesat i no es mou gens." },
+      { "text": "C) L'aire es torna fresc i el cel s'enfosqueix.", "correcta": true, "tts": "Opció C: L'aire es torna fresc i el cel s'enfosqueix." }
+    ]
+  },
+  {
+    "pregunta": "Quin nom rep el \"grunyit de la terra\" que ressona de lluny?",
+    "opcions": [
+      { "text": "A) El zumzeig de les abelles.", "correcta": false, "tts": "Opció A: El zumzeig de les abelles." },
+      { "text": "B) El tro que acompanya els llamps.", "correcta": true, "tts": "Opció B: El tro que acompanya els llamps." },
+      { "text": "C) El so dels peixos al riu inundat.", "correcta": false, "tts": "Opció C: El so dels peixos al riu inundat." }
+    ]
+  }
+];
 
   function parlar(text, callback) {
     window.speechSynthesis.cancel();
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
           guardarProgresNivell();
           parlar("Correcte.", () => {
             parlar("Carregant el següent nivell.", () => {
-              window.location.href = "../Nivell 4/index.html";
+              window.location.href = "../Nivell 10/index.html";
             });
           });
         } else {
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function guardarProgresNivell() {
-    const nivellActual = 4;
+    const nivellActual = 10;
     $.ajax({
       url: "https://fun.codelearn.cat/hackathon/game/store_progress",
       type: "POST",
@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (btnSeguent) {
     btnSeguent.addEventListener("click", () => {
       parlar("Carregant el següent nivell.", () => {
-        window.location.href = "../Nivell 4/index.html";
+        window.location.href = "../Nivell 10/index.html";
       });
     });
   }

@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
           guardarProgresNivell();
           parlar("Correcte.", () => {
             parlar("Carregant el següent nivell.", () => {
-              window.location.href = "../Nivell 4/index.html";
+              window.location.href = "../Nivell 5/index.html";
             });
           });
         } else {
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function guardarProgresNivell() {
-    const nivellActual = 4;
+    const nivellActual = 5;
     $.ajax({
       url: "https://fun.codelearn.cat/hackathon/game/store_progress",
       type: "POST",
@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (btnSeguent) {
     btnSeguent.addEventListener("click", () => {
       parlar("Carregant el següent nivell.", () => {
-        window.location.href = "../Nivell 3/index.html";
+        window.location.href = "../Nivell 5/index.html";
       });
     });
   }

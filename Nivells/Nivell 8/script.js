@@ -19,31 +19,31 @@ document.addEventListener("DOMContentLoaded", () => {
   let reproduint = false;
 
   const preguntesNivell1 = [
-            {
-                pregunta: "Quin ocell fa un repicar rítmic sobre l'escorça d'un pi?",
-                opcions: [
-                    { text: "A) Una àliga daurada que sobrevola el bosc.", correcta: false, tts: "Opció A: Una àliga daurada que sobrevola el bosc." },
-                    { text: "B) Un picot fuster.", correcta: true, tts: "Opció B: Un picot fuster." },
-                    { text: "C) Un mussol que s'ha despertat de nit.", correcta: false, tts: "Opció C: Un mussol que s'ha despertat de nit." }
-                ]
-            },
-            {
-                pregunta: "Com es descriu el cant d'aquests animals?",
-                opcions: [
-                    { text: "A) És un cant alegre i variat, amb refilets i piulades.", correcta: true, tts: "Opció A: És un cant alegre i variat, amb refilets i piulades." },
-                    { text: "B) Són ronsaments i crits de por.", correcta: false, tts: "Opció B: Són ronsaments i crits de por." },
-                    { text: "C) És un silenci absolut sense cap mena de so.", correcta: false, tts: "Opció C: És un silenci absolut sense cap mena de so." }
-                ]
-            },
-            {
-                pregunta: "A qui es refereix el text com els 'músics del bosc'?",
-                opcions: [
-                    { text: "A) Al soroll que fan les branques seques en caure.", correcta: false, tts: "Opció A: Al soroll que fan les branques seques en caure." },
-                    { text: "B) Al pas dels excursionistes que caminen.", correcta: false, tts: "Opció B: Al pas dels excursionistes que caminen." },
-                    { text: "C) Als ocells que saluden el nou dia.", correcta: true, tts: "Opció C: Als ocells que saluden el nou dia." }
-                ]
-            }
-        ];
+  {
+    "pregunta": "Quin so característic fan les abelles mentre volen entre les flors?",
+    "opcions": [
+      { "text": "A) Un fort rugit que espanta a tothom.", "correcta": false, "tts": "Opció A: Un fort rugit que espanta a tothom." },
+      { "text": "B) Un zumzeig constant i vibrant.", "correcta": true, "tts": "Opció B: Un zumzeig constant i vibrant." },
+      { "text": "C) El so d'unes campanes sonant de lluny.", "correcta": false, "tts": "Opció C: El so d'unes campanes sonant de lluny." }
+    ]
+  },
+  {
+    "pregunta": "On es troba amagat el grill que fa el seu cant rítmic?",
+    "opcions": [
+      { "text": "A) Amagat sota una fulla seca prop de terra.", "correcta": true, "tts": "Opció A: Amagat sota una fulla seca prop de terra." },
+      { "text": "B) Dalt de tot d'un núvol al cel.", "correcta": false, "tts": "Opció B: Dalt de tot d'un núvol al cel." },
+      { "text": "C) Dins d'una ampolla de vidre tancada.", "correcta": false, "tts": "Opció C: Dins d'una ampolla de vidre tancada." }
+    ]
+  },
+  {
+    "pregunta": "Com es descriu la banda sonora que creen aquests animals?",
+    "opcions": [
+      { "text": "A) Una música de piano molt lenta i trista.", "correcta": false, "tts": "Opció A: Una música de piano molt lenta i trista." },
+      { "text": "B) Un soroll de màquines tallant llenya.", "correcta": false, "tts": "Opror l' de màquines tallant llenya." },
+      { "text": "C) La banda sonora més petita i vibrant del bosc.", "correcta": true, "tts": "Opció C: La banda sonora més petita i vibrant del bosc." }
+    ]
+  }
+];
 
   function parlar(text, callback) {
     window.speechSynthesis.cancel();
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
           guardarProgresNivell();
           parlar("Correcte.", () => {
             parlar("Carregant el següent nivell.", () => {
-              window.location.href = "../Nivell 4/index.html";
+              window.location.href = "../Nivell 9/index.html";
             });
           });
         } else {
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function guardarProgresNivell() {
-    const nivellActual = 4;
+    const nivellActual = 9;
     $.ajax({
       url: "https://fun.codelearn.cat/hackathon/game/store_progress",
       type: "POST",
@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (btnSeguent) {
     btnSeguent.addEventListener("click", () => {
       parlar("Carregant el següent nivell.", () => {
-        window.location.href = "../Nivell 4/index.html";
+        window.location.href = "../Nivell 9/index.html";
       });
     });
   }

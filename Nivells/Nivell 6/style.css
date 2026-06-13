@@ -1,12 +1,12 @@
 /* ==========================================================================
-   ESTILS NIVELL 6: EL BOSC NOCTURN
+   Configuració general i fons del joc
    ========================================================================== */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #050811; /* Blau mitjanit gairebé negre */
-    color: #e2e8f0;
+    background-color: #0f1c12; /* Verd encara més profund i net */
+    color: #f4f9f4;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,12 +20,13 @@ body {
     text-align: center;
 }
 
+/* Botó Tornar enrere */
 .btn-tornar {
-    background-color: #0f1626;
-    border: 2px solid #1e293b;
-    color: #94a3b8;
+    background-color: #162e1c;
+    border: 2px solid #387648;
+    color: #85e39d;
     padding: 10px 22px;
-    border-radius: 30px;
+    border-radius: 30px; /* Estil píndola, més modern */
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
@@ -34,116 +35,164 @@ body {
 }
 
 .btn-tornar:hover, .btn-tornar:focus {
-    background-color: #1e293b;
+    background-color: #22492c;
+    border-color: #85e39d;
     outline: none;
 }
 
 .game-header h1 {
     font-size: 2.6rem;
-    color: #cbd5e1; /* Color lluna platejada */
+    color: #5dade2; /* Blau aigua lluminós */
     margin-top: 60px;
     margin-bottom: 25px;
     clear: both;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
+/* ==========================================================================
+   Targeta de Descripció (Imatges mentals)
+   ========================================================================== */
 .description-card {
-    background-color: #0b1121;
-    border: 2px solid #1a2333;
+    background-color: #142518;
+    border: 2px solid #22492c;
     padding: 25px;
     border-radius: 20px;
     text-align: left;
     margin-bottom: 35px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
-.description-card h2 { color: #94a3b8; font-size: 1.3rem; }
-.description-card p { font-size: 1.15rem; line-height: 1.6; color: #94a3b8; }
+.description-card h2 {
+    color: #5dade2;
+    margin-top: 0;
+    font-size: 1.3rem;
+    letter-spacing: 0.5px;
+}
 
-.audio-controls { margin-bottom: 40px; }
+.description-card p {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #cbdccb;
+    margin-bottom: 0;
+}
 
-/* BOTÓ DE LA NIT PREMIUM */
-.btn-play-nocturn {
-    background: linear-gradient(135deg, #0b1121, #1e1b4b); /* Liles i blaus de nit */
-    border: 3px solid #6366f1;
+/* ==========================================================================
+   Zona del Reproductor de So
+   ========================================================================== */
+.audio-controls {
+    margin-bottom: 40px;
+}
+
+.btn-play {
+    background-color: #142b3d;
+    border: 3px solid #2874a6;
     border-radius: 50px;
     color: #ffffff;
-    padding: 22px 50px;
+    padding: 20px 45px;
     font-size: 1.4rem;
     font-weight: bold;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 15px;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(40, 116, 166, 0.2);
 }
 
-.btn-play-nocturn:hover, .btn-play-nocturn:focus {
-    transform: scale(1.08);
-    box-shadow: 0 0 25px rgba(99, 102, 241, 0.4);
+.btn-play:hover, .btn-play:focus {
+    background-color: #1b4f72;
+    border-color: #5dade2;
+    transform: scale(1.04);
     outline: none;
+    box-shadow: 0 6px 20px rgba(93, 173, 226, 0.4);
 }
 
-.btn-play-nocturn:hover .icon, .btn-play-nocturn:focus .icon {
-    animation: mussolGira 0.5s ease infinite alternate;
-}
-
-@keyframes mussolGira {
-    0% { transform: rotate(-10deg); }
-    100% { transform: rotate(10deg); }
-}
-
-/* SECCIÓ DE PREGUNTES */
+/* ==========================================================================
+   NUEVO DISEÑO DE PREGUNTES (Més net, estilitzat i sense caixes gruixudes)
+   ========================================================================== */
 .quiz-section {
     margin-top: 20px;
     text-align: left;
     padding-top: 20px;
-    border-top: 2px solid #1a2333;
+    border-top: 2px solid #1a3321; /* Una línia fina separadora en comptes d'una caixa tancada */
 }
 
-.quiz-section h2 { color: #818cf8; font-size: 1.1rem; text-transform: uppercase; }
-.pregunta-text { font-size: 1.4rem; font-weight: bold; margin-bottom: 25px; }
+.quiz-section h2 {
+    color: #85e39d;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
 
-.quiz-options { display: flex; flex-direction: column; gap: 16px; }
+.pregunta-text {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
 
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Botons de resposta: Semblen llistes elegants */
 .btn-resposta {
-    background-color: #0b1121;
-    border: 2px solid #1a2333;
-    color: #cbd5e1;
+    background-color: #142518;
+    border: 2px solid #22492c;
+    color: #e0eee0;
     padding: 18px 25px;
     border-radius: 16px;
     font-size: 1.15rem;
     cursor: pointer;
     text-align: left;
     transition: all 0.23s ease;
+    font-weight: 500;
 }
 
-.btn-resposta:hover:not(:disabled), .btn-resposta:focus:not(:disabled) {
-    background-color: #131c31;
-    border-color: #6366f1;
-    transform: translateX(5px);
+/* Efecte en passar el ratolí o seleccionar */
+.btn-resposta:hover, .btn-resposta:focus {
+    background-color: #1a3321;
+    border-color: #85e39d;
+    color: #ffffff;
+    transform: translateX(5px); /* Petita animació cap a la dreta molt elegant */
     outline: none;
 }
 
-.btn-resposta:disabled { cursor: not-allowed; opacity: 0.8; }
+.btn-resposta.is-correct {
+    background-color: #285834;
+    border-color: #85e39d;
+    color: #ffffff;
+}
 
-/* BOTÓ FINAL DE JOC */
+.btn-resposta.is-failed {
+    background-color: #5c1d1d;
+    border-color: #e74c3c;
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   Botó de Següent Nivell
+   ========================================================================== */
 .btn-seg {
-    background-color: #1e1b4b;
-    border: 3px solid #6366f1;
+    background-color: #b35c00;
+    border: 3px solid #e67e22;
     color: white;
     padding: 18px 45px;
     font-size: 1.3rem;
     font-weight: bold;
     border-radius: 50px;
     cursor: pointer;
-    display: block;
-    margin: 0 auto;
     transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
 }
 
 .btn-seg:hover, .btn-seg:focus {
-    background-color: #312e81;
+    background-color: #cc6a00;
+    border-color: #ff9f43;
     transform: scale(1.05);
     outline: none;
+    box-shadow: 0 6px 20px rgba(255, 159, 67, 0.5);
 }
