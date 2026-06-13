@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Eco de la Natura - Menú Principal</title>
+    <style>
+        /* CSS INTEGRAT: Disseny net, gran i d'alt contrast */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f1c12; /* Verd fosc accessible */
+            color: #f4f9f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .menu-container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .menu-header h1 {
+            font-size: 3rem;
+            color: #85e39d;
+            margin-bottom: 40px;
+        }
+
+        .menu-options {
+            display: flex;
+            flex-direction: column;
+            gap: 30px; /* Molt espai entre botons */
+        }
+
+        .menu-btn {
+            color: #ffffff;
+            padding: 30px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        /* Botó 1: Continuar (Taronja) */
+        .btn-continue {
+            background-color: #b35c00;
+            border: 4px solid #e67e22;
+        }
+
+        /* Botó 2: Prova Final (Lila) */
+        .btn-challenge {
+            background-color: #2a1b3d;
+            border: 4px solid #a275e3;
+        }
+
+        /* Botó 3: Instruccions (Blau) */
+        .btn-info {
+            background-color: #1a3a5c;
+            border: 4px solid #2980b9;
+        }
+
+        .menu-btn .icon {
+            font-size: 3.5rem;
+            margin-right: 25px;
+        }
+
+        .menu-btn .text-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-btn .title {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .menu-btn .description {
+            font-size: 1.2rem;
+            color: #e0eee0;
+            margin-top: 5px;
+        }
+
+        /* Efectes de selecció i ratolí */
+        .menu-btn:hover, .menu-btn:focus {
+            transform: scale(1.05);
+            outline: none;
+        }
+        .btn-continue:hover, .btn-continue:focus { border-color: #ff9f43; box-shadow: 0 0 20px rgba(255, 159, 67, 0.5); }
+        .btn-challenge:hover, .btn-challenge:focus { border-color: #c39eff; box-shadow: 0 0 20px rgba(162, 117, 227, 0.5); }
+        .btn-info:hover, .btn-info:focus { border-color: #3498db; box-shadow: 0 0 20px rgba(52, 152, 219, 0.5); }
+    </style>
+</head>
+<body>
+
+    <main class="menu-container">
+        <header class="menu-header">
+            <h1>L'Eco de la Natura</h1>
+        </header>
+
+        <nav class="menu-options">
+            
+            <button class="menu-btn btn-continue" data-tts="Opció 1: Continuar Nivells. Segueix jugant des del nivell d'aprenentatge on et vas quedar.">
+                <span class="icon" aria-hidden="true">▶️</span>
+                <span class="text-container">
+                    <span class="title">Continuar Nivells</span>
+                    <span class="description">Torna a l'aprenentatge on vas deixar-ho.</span>
+                </span>
+            </button>
+
+            <button class="menu-btn btn-challenge" data-tts="Opció 2: El Repte Final. Escolta el bosc sencer, reconeix els sons apresos i relaxa't.">
+                <span class="icon" aria-hidden="true">🌲🎧</span>
+                <span class="text-container">
+                    <span class="title">Nivell 10: El Repte Final</span>
+                    <span class="description">Escolta el bosc, descobreix els elements i calma't.</span>
+                </span>
+            </button>
+
+            <button class="menu-btn btn-info" data-tts="Opció 3: Instruccions de veu. Escolta com funciona el joc i com imaginar el bosc.">
+                <span class="icon" aria-hidden="true">🔊</span>
+                <span class="text-container">
+                    <span class="title">Instruccions de Veu</span>
+                    <span class="description">Aprèn el funcionament d'aquest viatge sonor.</span>
+                </span>
+            </button>
+
+        </nav>
+    </main>
+
+    <script>
+        // JAVASCRIPT: Sistema de lectura en veu alta automàtica en català
+        const botons = document.querySelectorAll('.menu-btn');
+
+        function parlar(text) {
+            window.speechSynthesis.cancel(); // Atura la veu anterior
+            const missatge = new SpeechSynthesisUtterance(text);
+            missatge.lang = 'ca-ES';
+            missatge.rate = 1.1;
+            window.speechSynthesis.speak(missatge);
+        }
+
+        botons.forEach(boto => {
+            const textPerLlegir = boto.getAttribute('data-tts');
+
+            boto.addEventListener('mouseenter', () => parlar(textPerLlegir));
+            boto.addEventListener('focus', () => parlar(textPerLlegir));
+
+            boto.addEventListener('click', () => {
+                if (boto.classList.contains('btn-continue')) {
+                    parlar("Carregant els teus nivells... Tornem al bosc!");
+                } else if (boto.classList.contains('btn-challenge')) {
+                    parlar("Començant la prova final. Tanca els ulls, respira i escolta el bosc.");
+                } else if (boto.classList.contains('btn-info')) {
+                    parlar("Instruccions: El joc et guiarà per la natura fent-te escoltar sons reals i donant-te descripcions per ajudar-te a imaginar el bosc a la teva ment. Al nivell final, viuràs un moment de relaxació on hauràs d'identificar quins elements estan sonant.");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
