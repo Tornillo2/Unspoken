@@ -1,0 +1,216 @@
+/* ==========================================================================
+   ESTILOS NIVEL 9: LA TEMPESTA (DARK ATMOSPHERE)
+   ========================================================================== */
+
+/* Configuración básica y tipografía */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0a0e1a; /* Azul tormenta muy oscuro, casi negro */
+    color: #e2e8f0;
+    display: block;
+    min-height: 100vh;
+}
+
+/* Contenedor principal del juego */
+.game-container {
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+/* CABECERA Y BOTÓN VOLVER */
+.game-header {
+    margin-bottom: 25px;
+}
+
+.btn-tornar {
+    background-color: #1a2333;
+    border: 2px solid #334155;
+    color: #94a3b8;
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    float: left;
+    transition: all 0.2s ease;
+}
+
+.btn-tornar:hover, .btn-tornar:focus {
+    background-color: #2d3748;
+    color: #ffffff;
+    border-color: #00d4ff;
+    outline: none;
+}
+
+/* TÍTULO PRINCIPAL (Efecto Eléctrico) */
+.game-header h1 {
+    font-size: 2.6rem;
+    color: #00d4ff; /* Azul eléctrico brillante */
+    margin-top: 60px;
+    margin-bottom: 25px;
+    clear: both;
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+}
+
+/* TARJETA DE DESCRIPCIÓN DEL ENTORNO */
+.description-card {
+    background-color: #111827;
+    border: 2px solid #1e293b;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: left;
+    margin-bottom: 35px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.description-card h2 {
+    color: #00d4ff;
+    font-size: 1.3rem;
+    margin-top: 0;
+}
+
+.description-card p {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+}
+
+.description-card strong {
+    color: #00d4ff;
+}
+
+/* SECCIÓN CONTROLES DE AUDIO */
+.audio-controls {
+    margin-bottom: 40px;
+}
+
+/* BOTÓN DE REPRODUCCIÓN PREMIUM (Efecto Rayo) */
+.btn-play-tempesta {
+    background: linear-gradient(135deg, #0f172a, #1e1b4b);
+    border: 3px solid #00d4ff;
+    border-radius: 50px;
+    color: #ffffff;
+    padding: 22px 50px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-play-tempesta:hover, .btn-play-tempesta:focus {
+    transform: scale(1.08);
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+    outline: none;
+}
+
+/* Animación de destello de rayo en el icono al pasar el ratón */
+.btn-play-tempesta:hover .icon, .btn-play-tempesta:focus .icon {
+    animation: llampFlash 0.3s ease infinite alternate;
+}
+
+@keyframes llampFlash {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0px #fff);
+    }
+    100% {
+        transform: scale(1.3) rotate(10deg);
+        filter: drop-shadow(0 0 12px #00d4ff);
+    }
+}
+
+/* SECCIÓN DEL CUESTIONARIO (QUIZ) */
+.quiz-section {
+    margin-top: 20px;
+    text-align: left;
+    padding-top: 20px;
+    border-top: 2px solid #1e293b;
+}
+
+.quiz-section h2 {
+    color: #94a3b8;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.pregunta-text {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 25px;
+    color: #ffffff;
+    line-height: 1.4;
+}
+
+/* Opciones de respuesta dispuestas en lista vertical */
+.quiz-options {
+    display: block;
+}
+
+/* Botones de respuesta individuales */
+.btn-resposta {
+    display: block;
+    width: 100%;
+    background-color: #111827;
+    border: 2px solid #1e293b;
+    color: #cbd5e1;
+    padding: 18px 25px;
+    border-radius: 16px;
+    font-size: 1.15rem;
+    cursor: pointer;
+    text-align: left;
+    margin-bottom: 16px;
+    transition: all 0.23s ease;
+}
+
+.btn-resposta:hover:not(:disabled), .btn-resposta:focus:not(:disabled) {
+    background-color: #1f2937;
+    border-color: #00d4ff;
+    transform: translateX(5px);
+    color: #ffffff;
+    outline: none;
+}
+
+/* Estado deshabilitado tras responder */
+.btn-resposta:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+/* BOTÓN DE SIGUIENTE NIVEL */
+.btn-seg {
+    background-color: #00d4ff;
+    border: none;
+    color: #0a0e1a;
+    padding: 18px 45px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto 0 auto;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
+}
+
+.btn-seg:hover, .btn-seg:focus {
+    background-color: #33e0ff;
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 212, 255, 0.6);
+    outline: none;
+}
