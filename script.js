@@ -182,15 +182,15 @@ document.addEventListener("DOMContentLoaded", () => {
       `https://fun.codelearn.cat/hackathon/game/get_progress?game_id=${currentGameID}`,
       function (data) {
         //extreure el nivell actual i guardar-lo a localStorage
-        if (data && data.current_level) {
-          localStorage.setItem("currentLevel", data.current_level);
+        if (data && data.data.nivell) {
+          localStorage.setItem("currentLevel", data.data.nivell);
           console.log(
             "Continuing game with ID:",
             currentGameID,
             "at level:",
-            data.current_level,
+            data.data.nivell,
           );
-          updateContinueButtonLabel(data.current_level);
+          updateContinueButtonLabel(data.data.nivell);
         }
       },
     ).fail(function (jqXHR) {
@@ -216,6 +216,22 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("seed", data.seed);
         console.log("New game started with ID:", data.game_id);
         updateContinueButtonLabel(localStorage.getItem("currentLevel"));
+
+        $.ajax({
+          url: "https://fun.codelearn.cat/hackathon/game/store_progress",
+          type: "POST",
+          contentType: "application/json", // Indica al servidor que envies JSON
+          data: JSON.stringify({
+            game_id: data.game_id,
+            data: { nivell: 1 },
+          }), // Converteix l'objecte a format JSON de text
+        })
+          .done((response) => {
+            console.log("Progrés guardat correctament:", response);
+          })
+          .fail((error) => {
+            console.error("Error guardant el progrés:", error);
+          });
       }
     });
   }

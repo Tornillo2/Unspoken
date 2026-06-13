@@ -161,6 +161,18 @@ body {
     outline: none;
 }
 
+.btn-resposta.is-correct {
+    background-color: #285834;
+    border-color: #85e39d;
+    color: #ffffff;
+}
+
+.btn-resposta.is-failed {
+    background-color: #5c1d1d;
+    border-color: #e74c3c;
+    color: #ffffff;
+}
+
 /* ==========================================================================
    Botó de Següent Nivell
    ========================================================================== */
