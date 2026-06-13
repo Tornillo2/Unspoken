@@ -1,11 +1,11 @@
 /* ==========================================================================
-   ESTILS GENERALS DE LA PANTALLA DEL JOC
+   Configuració general i fons del joc
    ========================================================================== */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #0f1c12; /* Verd bosc profund */
+    background-color: #0f1c12; /* Verd encara més profund i net */
     color: #f4f9f4;
     display: flex;
     justify-content: center;
@@ -20,12 +20,13 @@ body {
     text-align: center;
 }
 
+/* Botó Tornar enrere */
 .btn-tornar {
     background-color: #162e1c;
     border: 2px solid #387648;
     color: #85e39d;
     padding: 10px 22px;
-    border-radius: 30px;
+    border-radius: 30px; /* Estil píndola, més modern */
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
@@ -41,12 +42,15 @@ body {
 
 .game-header h1 {
     font-size: 2.6rem;
-    color: #5dade2; /* Blau cel bonic */
+    color: #5dade2; /* Blau aigua lluminós */
     margin-top: 60px;
     margin-bottom: 25px;
     clear: both;
 }
 
+/* ==========================================================================
+   Targeta de Descripció (Imatges mentals)
+   ========================================================================== */
 .description-card {
     background-color: #142518;
     border: 2px solid #22492c;
@@ -61,68 +65,55 @@ body {
     color: #5dade2;
     margin-top: 0;
     font-size: 1.3rem;
+    letter-spacing: 0.5px;
 }
 
 .description-card p {
     font-size: 1.15rem;
     line-height: 1.6;
     color: #cbdccb;
+    margin-bottom: 0;
 }
 
+/* ==========================================================================
+   Zona del Reproductor de So
+   ========================================================================== */
 .audio-controls {
     margin-bottom: 40px;
 }
 
-/* ==========================================================================
-   BOTÓ DE REPRODUCCIÓ PREMIUM (Amb degradat i animació)
-   ========================================================================== */
-.btn-play-ocells {
-    background: linear-gradient(135deg, #114b27, #1b4f72); /* Degradat de bosc a aigua profunda */
-    border: 3px solid #52be80;
+.btn-play {
+    background-color: #142b3d;
+    border: 3px solid #2874a6;
     border-radius: 50px;
     color: #ffffff;
-    padding: 22px 50px;
+    padding: 20px 45px;
     font-size: 1.4rem;
     font-weight: bold;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecte rebot */
-    position: relative;
-    overflow: hidden;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(40, 116, 166, 0.2);
 }
 
-.btn-play-ocells:hover, .btn-play-ocells:focus {
-    transform: scale(1.08); /* Creix una mica */
-    border-color: #85e39d;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 0 15px rgba(133, 227, 157, 0.6);
+.btn-play:hover, .btn-play:focus {
+    background-color: #1b4f72;
+    border-color: #5dade2;
+    transform: scale(1.04);
     outline: none;
-}
-
-/* Animació de la icona de l'ocell */
-.btn-play-ocells:hover .icon, .btn-play-ocells:focus .icon {
-    animation: ocellBatega 0.5s ease infinite alternate;
-}
-
-.btn-play-ocells:active {
-    transform: scale(0.96); /* Efecte tàctil d'enfonsar-se */
-}
-
-@keyframes ocellBatega {
-    0% { transform: rotate(-10deg) scale(1.1); }
-    100% { transform: rotate(15deg) scale(1.2); }
+    box-shadow: 0 6px 20px rgba(93, 173, 226, 0.4);
 }
 
 /* ==========================================================================
-   SISTEMA DE PREGUNTES I RESPOSTES
+   NUEVO DISEÑO DE PREGUNTES (Més net, estilitzat i sense caixes gruixudes)
    ========================================================================== */
 .quiz-section {
     margin-top: 20px;
     text-align: left;
     padding-top: 20px;
-    border-top: 2px solid #1a3321;
+    border-top: 2px solid #1a3321; /* Una línia fina separadora en comptes d'una caixa tancada */
 }
 
 .quiz-section h2 {
@@ -147,6 +138,7 @@ body {
     gap: 16px;
 }
 
+/* Botons de resposta: Semblen llistes elegants */
 .btn-resposta {
     background-color: #142518;
     border: 2px solid #22492c;
@@ -160,20 +152,30 @@ body {
     font-weight: 500;
 }
 
-.btn-resposta:hover:not(:disabled), .btn-resposta:focus:not(:disabled) {
+/* Efecte en passar el ratolí o seleccionar */
+.btn-resposta:hover, .btn-resposta:focus {
     background-color: #1a3321;
     border-color: #85e39d;
     color: #ffffff;
-    transform: translateX(5px);
+    transform: translateX(5px); /* Petita animació cap a la dreta molt elegant */
     outline: none;
 }
 
-.btn-resposta:disabled {
-    cursor: not-allowed;
-    opacity: 0.8;
+.btn-resposta.is-correct {
+    background-color: #285834;
+    border-color: #85e39d;
+    color: #ffffff;
 }
 
-/* Botó de següent nivell (Taronja cridaner) */
+.btn-resposta.is-failed {
+    background-color: #5c1d1d;
+    border-color: #e74c3c;
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   Botó de Següent Nivell
+   ========================================================================== */
 .btn-seg {
     background-color: #b35c00;
     border: 3px solid #e67e22;
@@ -185,8 +187,6 @@ body {
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
-    display: block;
-    margin: 0 auto;
 }
 
 .btn-seg:hover, .btn-seg:focus {

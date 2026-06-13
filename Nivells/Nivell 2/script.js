@@ -162,14 +162,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
 
-  if (btnTornar) {
-    btnTornar.addEventListener("click", () => {
-      audioRiu.pause();
-      parlar("Tornant al camí de nivells.", () => {
-        window.location.href = "../index.html";
-      });
-    });
-  }
 
   if (btnAudio) {
     btnAudio.addEventListener("click", () => {

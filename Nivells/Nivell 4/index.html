@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Introspoken - Nivell 4: El Cel i el Vent</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <script src="/jquery-4.0.0.min.js"></script>
 </head>
 <body>
 
@@ -28,127 +30,19 @@
         </section>
 
         <section id="zona-preguntes" class="quiz-section">
-            <h2 id="titol-pregunta" tabindex="0">Pregunta del nivell:</h2>
-
-            <div class="quiz-container" style="display: none;">
-                <p class="pregunta-text">Què s'observa en arribar a la clariana dalt de tot?</p>
-                <div class="quiz-options">
-                    <button class="btn-resposta" data-correcta="false" data-tts="Opció A: Una cova fosca i tancada.">A) Una cova fosca i tancada.</button>
-                    <button class="btn-resposta" data-correcta="true" data-tts="Opció B: Els arbres deixen pas a un cel infinit.">B) Els arbres deixen pas a un cel infinit.</button>
-                    <button class="btn-resposta" data-correcta="false" data-tts="Opció C: Un gran llac ple de peixos.">C) Un gran llac ple de peixos.</button>
+            <h2 id="titol-pregunta" tabindex="0" data-tts="">Pregunta del nivell:</h2>
+            <p id="pregunta-text" class="pregunta-text"></p>
+            
+            <div id="quiz-options" class="quiz-options">
                 </div>
-            </div>
-
-            <div class="quiz-container" style="display: none;">
-                <p class="pregunta-text">Com es descriu la sensació del vent a les orelles?</p>
-                <div class="quiz-options">
-                    <button class="btn-resposta" data-correcta="true" data-tts="Opció A: Com una carícia freda i constant que xiula.">A) Com una carícia freda i constant que xiula.</button>
-                    <button class="btn-resposta" data-correcta="false" data-tts="Opció B: Com una escaldor forta que crema.">B) Com una escaldor forta que crema.</button>
-                    <button class="btn-resposta" data-correcta="false" data-tts="Opció C: No es nota gens de vent, fa molta calor.">C) No es nota gens de vent, fa molta calor.</button>
-                </div>
-            </div>
-
-            <div class="quiz-container" style="display: none;">
-                <p class="pregunta-text">A què es compara l'aire pur d'aquest nivell?</p>
-                <div class="quiz-options">
-                    <button class="btn-resposta" data-correcta="false" data-tts="Opció A: Al fum de les xemeneies de la ciutat.">A) Al fum de les xemeneies de la ciutat.</button>
-                    <button class="btn-resposta" data-correcta="false" data-tts="Opció B: A la humitat de la vora del riu.">B) A la humitat de la vora del riu.</button>
-                    <button class="btn-resposta" data-correcta="true" data-tts="Opció C: A l'aire pur de la llibertat.">C) A l'aire pur de la llibertat.</button>
-                </div>
-            </div>
         </section>
 
         <section id="zona-seguent" style="display: none; margin-top: 30px;">
-            <button id="btn-seguent" class="btn-seg" onclick="window.location.href='final.html'">Anar al Nivell 5 </button>
+            <button id="btn-seguent" class="btn-seg" data-tts="Felicitats! Has encertat. Prem aquí per anar al Nivell quatre." onclick="window.location.href='nivell4.html'">Anar al Nivell 4 ➡️</button>
         </section>
 
         <audio id="sound-effect" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" loop></audio>
     </main>
 
-    <script>
-        const btnAudio = document.getElementById('btn-audio');
-        const àudioVent = document.getElementById('sound-effect');
-        const zonaSeguent = document.getElementById('zona-seguent');
-        const titolPregunta = document.getElementById('titol-pregunta');
-
-        let reproduint = false;
-
-        function parlar(text, callback) {
-            window.speechSynthesis.cancel();
-            const missatge = new SpeechSynthesisUtterance(text);
-            missatge.lang = 'ca-ES';
-            missatge.rate = 1.0;
-            if (callback) missatge.onend = callback;
-            window.speechSynthesis.speak(missatge);
-        }
-
-        function actualitzarLectorsVeu() {
-            document.querySelectorAll('[data-tts]').forEach(element => {
-                element.onmouseenter = () => { parlar(element.getAttribute('data-tts')); };
-                element.onfocus = () => { parlar(element.getAttribute('data-tts')); };
-            });
-        }
-
-        function inicialitzarPregunta() {
-            const llistaPreguntes = document.querySelectorAll('.quiz-container');
-            if (llistaPreguntes.length === 0) return;
-
-            const indexAleatori = Math.floor(Math.random() * llistaPreguntes.length);
-            const preguntaEscollida = llistaPreguntes[indexAleatori];
-            preguntaEscollida.style.display = "block";
-
-            const textDeLaPregunta = preguntaEscollida.querySelector('.pregunta-text').innerText;
-            titolPregunta.setAttribute('data-tts', "Pregunta del nivell: " + textDeLaPregunta);
-
-            const botonsResposta = preguntaEscollida.querySelectorAll('.btn-resposta');
-
-            botonsResposta.forEach(boto => {
-                boto.addEventListener('click', () => {
-                    botonsResposta.forEach(b => b.disabled = true);
-
-                    const esCorrecta = boto.getAttribute('data-correcta') === "true";
-
-                    if (esCorrecta) {
-                        // Canviat correctament a color verd
-                        boto.style.backgroundColor = "#1e8449"; 
-                        boto.style.borderColor = "#52be80";
-                        boto.style.color = "#ffffff";
-                        zonaSeguent.style.display = "block";
-                        actualitzarLectorsVeu();
-                        parlar("Increïble! Resposta correcta.");
-                    } else {
-                        boto.style.backgroundColor = "#5c1d1d"; // Vermell error
-                        boto.style.borderColor = "#e74c3c";
-                        boto.style.color = "#ffffff";
-                        parlar("Aquesta resposta no és correcta. Torna a carregar la pàgina per provar-ho de nou.");
-                    }
-                });
-            });
-
-            actualitzarLectorsVeu();
-        }
-
-        btnAudio.addEventListener('click', () => {
-            if (!reproduint) {
-                àudioVent.play();
-                btnAudio.querySelector('.text').innerText = "Aturar el Vent";
-                btnAudio.querySelector('.icon').innerText = "⏹️";
-                btnAudio.setAttribute('data-tts', "Botó de so. Prem per aturar el so del vent.");
-                reproduint = true;
-                parlar("Iniciant el so del vent dalt de la muntanya.");
-            } else {
-                àudioVent.pause();
-                btnAudio.querySelector('.text').innerText = "Escotar el Vent";
-                btnAudio.querySelector('.icon').innerText = "🌬️";
-                btnAudio.setAttribute('data-tts', "Botó de so. Prem per escoltar la força del vent.");
-                reproduint = false;
-                parlar("So aturat.");
-            }
-        });
-
-        window.onload = () => {
-            inicialitzarPregunta();
-        };
-    </script>
 </body>
 </html>
