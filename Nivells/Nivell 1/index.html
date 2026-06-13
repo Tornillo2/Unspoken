@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introspoken - Nivell 1: L'Aigua</title>
+    <link rel="stylesheet" href="style1.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <main class="game-container">
+        <header class="game-header">
+            <button class="btn-tornar" data-tts="Tornar al camí de nivells." onclick="window.location.href='/Nivells/index.html'">⬅️ Camí</button>
+            <h1 tabindex="0" data-tts="Nivell u: L'Aigua.">Nivell 1: L'Aigua</h1>
+        </header>
+
+        <section class="description-card" tabindex="0" data-tts="Tanca els ulls i imagina. L'aigua d'un rierol de muntanya és freda i pura. Llisca ràpida sobre pedres llises i arrodonides. El so és un murmuri continu, com un secret xiuxiuejat entre les roques.">
+            <h2>Imagina l'entorn:</h2>
+            <p>L'aigua d'un rierol de muntanya és <strong>freda i pura</strong>. Llisca ràpida sobre pedres llises.</p>
+            <p>El seu so és un <strong>murmuri continu</strong>, com un secret xiuxiuejat entre les roques.</p>
+        </section>
+
+        <section class="audio-controls">
+            <button id="btn-audio" class="btn-play" data-tts="Botó de so. Prem per escoltar el murmuri del riu.">
+                <span class="icon">🔊</span> 
+                <span class="text">Escotar el Riu</span>
+            </button>
+        </section>
+
+        <section id="zona-preguntes" class="quiz-section">
+            <h2 id="titol-pregunta" tabindex="0" data-tts="Pregunta del nivell: Com és el so d'aquest rierol de muntanya segons la descripció?">Pregunta del nivell:</h2>
+            <p class="pregunta-text">Com és el so d'aquest rierol de muntanya?</p>
+            
+            <div class="quiz-options">
+                <button class="btn-resposta incorrecta" data-tts="Opció A: És un soroll molt fort i brusc, com una cascada gegant.">A) Fort i brusc, com una cascada gegant.</button>
+                <button class="btn-resposta correcta" data-tts="Opció B: És un murmuri continu, com un secret entre les roques.">B) Un murmuri continu, com un secret entre les roques.</button>
+                <button class="btn-resposta incorrecta" data-tts="Opció C: És un so silenciós que gairebé no es pot sentir.">C) Un so silenciós que gairebé no es pot sentir.</button>
+            </div>
+        </section>
+
+        <section id="zona-seguent" style="display: none; margin-top: 30px;">
+            <button id="btn-seguent" class="btn-seg" data-tts="Felicitats! Has encertat. Prem aquí per anar al Nivell dos: Els Arbres.">Anar al Nivell 2 ➡️</button>
+        </section>
+
+        <audio id="sound-effect" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
+    </main>
+
+</body>
+</html>
