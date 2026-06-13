@@ -3,42 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'Eco de la Natura - Menú Principal</title>
+    <title>Introspoken</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
 
     <main class="menu-container">
         <header class="menu-header">
-            <h1>L'Eco de la Natura</h1>
-            <p>Benvingut/da. Selecciona una opció per començar el teu viatge sonor.</p>
+            <h1>Introspoken</h1>
         </header>
 
+        <section class="menu-story" aria-labelledby="how-to-play-title">
+            <h2 id="how-to-play-title">Com es fa servir</h2>
+            <p>Prem <span class="kbd">Tab</span> per moure't entre opcions i <span class="kbd">Enter</span> o <span class="kbd">Espai</span> per activar-les. No cal mirar la pantalla: l'experiència és principalment sonora.</p>
+        </section>
+
+        <section class="menu-story" aria-labelledby="story-title">
+            <h2 id="story-title">Què hi trobaràs</h2>
+            <p>Sons de fulles, ocells, aigua, vent i altres elements del bosc, explicats amb paraules clares perquè puguis imaginar l'entorn amb tranquil·litat.</p>
+        </section>
+
         <nav class="menu-options">
-            <button class="menu-btn o-aprenentatge" aria-label="Opció 1: El Despertar dels Sentits. Mode Aprenentatge.">
+            <button class="menu-btn o-aprenentatge" aria-label="Opció 1: Aprenentatge. Descobreix els sons i les descripcions de la natura.">
                 <span class="icon">🌲</span>
-                <span class="text">1. El Despertar dels Sentits</span>
-                <span class="subtext">Aprèn els sons de la natura un per un.</span>
+                <span class="text">1. Aprèn els sons de la natura</span>
+                <span class="subtext">Escolta i llegeix la descripció de cada element per entendre'l millor.</span>
             </button>
 
-            <button class="menu-btn o-repte" aria-label="Opció 2: El Repte del Bosc. Prova Final.">
+            <button class="menu-btn o-repte" aria-label="Opció 2: Repte final del bosc. Escolta el bosc i identifica els elements.">
                 <span class="icon">🦉</span>
-                <span class="text">2. El Repte del Bosc</span>
-                <span class="subtext">Escolta el bosc, identifica els sons i relaxa't.</span>
+                <span class="text">2. Prova final del bosc</span>
+                <span class="subtext">Escolta un paisatge sonor i digues quins elements hi reconeixes.</span>
             </button>
 
-            <button class="menu-btn o-calma" aria-label="Opció 3: El Racó de la Calma. Mode Relax.">
+            <button class="menu-btn o-calma" aria-label="Opció 3: Espai de calma. Sons suaus per relaxar-se.">
                 <span class="icon">💧</span>
-                <span class="text">3. El Racó de la Calma</span>
-                <span class="subtext">Sons continus per meditar o descansar.</span>
+                <span class="text">3. Espai de calma</span>
+                <span class="subtext">Sons suaus de natura per relaxar-te i descansar.</span>
             </button>
 
-            <button class="menu-btn o-ajuda" aria-label="Opció 4: Com es juga? Instruccions de veu.">
+            <button class="menu-btn o-ajuda" aria-label="Opció 4: Guia d'ús i instruccions de veu.">
                 <span class="icon">🔊</span>
                 <span class="text">4. Com es juga?</span>
-                <span class="subtext">Escolta les instruccions del joc.</span>
+                <span class="subtext">Tens una guia de veu i una explicació pas a pas.</span>
             </button>
         </nav>
+
+        <footer class="menu-footer">
+            <p>Objectiu: aprendre la natura amb sons i paraules, i acabar amb una escolta final que també ajudi a tranquil·litzar. El disseny visual és secundari; el centre és l'àudio.</p>
+        </footer>
     </main>
 
 </body>
