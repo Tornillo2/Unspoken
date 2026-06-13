@@ -1,0 +1,116 @@
+/* ==========================================================================
+   ESTILS NIVELL 10: EL GRAN FULL DE REPÀS
+   ========================================================================== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0b0c10;
+    color: #f8f1e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 650px;
+    padding: 30px 20px;
+}
+
+.btn-tornar {
+    background-color: #1f2026;
+    border: 2px solid #b8860b;
+    color: #daa520;
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    float: left;
+}
+
+.game-header h1 {
+    font-size: 2.6rem;
+    color: #ffd700;
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 25px;
+    clear: both;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+.description-card {
+    background-color: #141519;
+    border: 2px solid #b8860b;
+    padding: 22px;
+    border-radius: 20px;
+    margin-bottom: 35px;
+}
+
+.description-card h2 { color: #ffd700; margin-top: 0; font-size: 1.3rem;}
+
+/* SECCIÓ PREGUNTES */
+.quiz-section {
+    border-top: 2px solid #23242a;
+    padding-top: 20px;
+}
+
+.num-pregunta {
+    color: #daa520;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+.pregunta-text {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn-resposta {
+    background-color: #141519;
+    border: 2px solid #23242a;
+    color: #cbd5e1;
+    padding: 18px 25px;
+    border-radius: 16px;
+    font-size: 1.15rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.btn-resposta:hover:not(:disabled) {
+    border-color: #ffd700;
+    background-color: #1c1d24;
+    transform: translateX(4px);
+}
+
+/* QUADRE DE VICTÒRIA */
+.victoria-box {
+    background-color: #141519;
+    border: 3px dashed #ffd700;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.btn-seg {
+    background: linear-gradient(90deg, #ffd700, #daa520);
+    border: none;
+    color: black;
+    padding: 18px 45px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 0 auto;
+    display: block;
+}

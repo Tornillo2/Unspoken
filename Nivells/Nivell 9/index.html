@@ -10,7 +10,7 @@
 
     <main class="game-container">
         <header class="game-header">
-            <button class="btn-tornar" data-tts="Tornar al camí de nivells." onclick="window.location.href='/Nivells/index.html'">⬅️ Camí</button>
+            <button class="btn-tornar" data-tts="Tornar als nivells." onclick="window.location.href='/Nivells/index.html'">⬅️ Tornar</button>
             <h1 tabindex="0" data-tts="Nivell nou: La Tempesta al Bosc.">Nivell 9: La Tempesta</h1>
         </header>
 
@@ -21,41 +21,18 @@
         </section>
 
         <section class="audio-controls">
-            <button id="btn-audio" class="btn-play-tempesta" data-tts="Botó de so. Prem per escoltar la força de la tempesta.">
-                <span class="icon">⚡</span> 
-                <span class="text">Escotar la Tempesta</span>
+            <button id="btn-audio" class="btn-play" data-tts="Botó de so. Prem per escoltar la força de la tempesta.">
+                <span class="icon">🔊</span> 
+                <span class="text">Escotar el so</span>
             </button>
         </section>
 
         <section id="zona-preguntes" class="quiz-section">
-            <h2 id="titol-pregunta" tabindex="0">Pregunta del nivell:</h2>
-
-            <div class="quiz-container" style="display: none;">
-                <p class="pregunta-text">Com es descriu el so de la pluja intensa sobre les fulles?</p>
-                <div class="quiz-options">
-                    <button class="btn-resposta" data-correcta="true" data-tts="Opció A: Com si fossin milers de tambors repicant.">A) Com si fossin milers de tambors repicant.</button>
-                    <button class="btn-resposta" data-correcta="false" data-tts="Opció B: Com un silenci absolut i pausat.">B) Com un silenci absolut i pausat.</button>
-                    <button class="btn-resposta" data-correcta="false" data-tts="Opció C: Com el cant d'un grill amagat a l'herba.">C) Com el cant d'un grill amagat a l'herba.</button>
+            <h2 id="titol-pregunta" tabindex="0" data-tts="">Pregunta del nivell:</h2>
+            <p id="pregunta-text" class="pregunta-text"></p>
+            
+            <div id="quiz-options" class="quiz-options">
                 </div>
-            </div>
-
-            <div class="quiz-container" style="display: none;">
-                <p class="pregunta-text">Què passa amb la temperatura just abans de la tempesta?</p>
-                <div class="quiz-options">
-                    <button class="btn-resposta" data-correcta="false" data-tts="Opció A: Comença a fer una calor extrema que crema el bosc.">A) Comença a fer una calor extrema que crema el bosc.</button>
-                    <button class="btn-resposta" data-correcta="false" data-tts="Opció B: L'aire es torna pesat i no es mou gens.">B) L'aire es torna pesat i no es mou gens.</button>
-                    <button class="btn-resposta" data-correcta="true" data-tts="Opció C: L'aire es torna fresc i el cel s'enfosqueix.">C) L'aire es torna fresc i el cel s'enfosqueix.</button>
-                </div>
-            </div>
-
-            <div class="quiz-container" style="display: none;">
-                <p class="pregunta-text">Quin nom rep el "grunyit de la terra" que ressona de lluny?</p>
-                <div class="quiz-options">
-                    <button class="btn-resposta" data-correcta="false" data-tts="Opció A: El zumzeig de les abelles.">A) El zumzeig de les abelles.</button>
-                    <button class="btn-resposta" data-correcta="true" data-tts="Opció B: El tro que acompanya els llamps.">B) El tro que acompanya els llamps.</button>
-                    <button class="btn-resposta" data-correcta="false" data-tts="Opció C: El so dels peixos al riu inundat.">C) El so dels peixos al riu inundat.</button>
-                </div>
-            </div>
         </section>
 
         <section id="zona-seguent" style="display: none; margin-top: 30px;">
@@ -65,96 +42,5 @@
         <audio id="sound-effect" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" loop></audio>
     </main>
 
-    <script>
-        /* ==========================================================================
-           LÒGICA DEL JOC (JAVASCRIPT INTERN)
-           ========================================================================== */
-        const btnAudio = document.getElementById('btn-audio');
-        const àudioTempesta = document.getElementById('sound-effect');
-        const zonaSeguent = document.getElementById('zona-seguent');
-        const titolPregunta = document.getElementById('titol-pregunta');
-
-        let reproduint = false;
-
-        // Funció per al lector de veu (TTS)
-        function parlar(text, callback) {
-            window.speechSynthesis.cancel();
-            const missatge = new SpeechSynthesisUtterance(text);
-            missatge.lang = 'ca-ES';
-            missatge.rate = 1.0;
-            if (callback) missatge.onend = callback;
-            window.speechSynthesis.speak(missatge);
-        }
-
-        // Actualitza els esdeveniments de veu per a elements nous
-        function actualitzarLectorsVeu() {
-            document.querySelectorAll('[data-tts]').forEach(element => {
-                element.onmouseenter = () => { parlar(element.getAttribute('data-tts')); };
-                element.onfocus = () => { parlar(element.getAttribute('data-tts')); };
-            });
-        }
-
-        // Tria una pregunta aleatòria de les que hi ha al HTML
-        function inicialitzarPregunta() {
-            const llistaPreguntes = document.querySelectorAll('.quiz-container');
-            if (llistaPreguntes.length === 0) return;
-
-            const indexAleatori = Math.floor(Math.random() * llistaPreguntes.length);
-            const preguntaEscollida = llistaPreguntes[indexAleatori];
-            preguntaEscollida.style.display = "block";
-
-            const textPregunta = preguntaEscollida.querySelector('.pregunta-text').innerText;
-            titolPregunta.setAttribute('data-tts', "Pregunta del nivell: " + textPregunta);
-
-            const botonsResposta = preguntaEscollida.querySelectorAll('.btn-resposta');
-
-            botonsResposta.forEach(boto => {
-                boto.addEventListener('click', () => {
-                    botonsResposta.forEach(b => b.disabled = true);
-
-                    const esCorrecta = boto.getAttribute('data-correcta') === "true";
-
-                    if (esCorrecta) {
-                        // Encert: Color verd boscós
-                        boto.style.backgroundColor = "#1e8449"; 
-                        boto.style.borderColor = "#52be80";
-                        boto.style.color = "#ffffff";
-                        zonaSeguent.style.display = "block";
-                        actualitzarLectorsVeu();
-                        parlar("Impressionant! Has dominat la força de la tempesta. Ja pots seguir endavant.");
-                    } else {
-                        // Error: Vermell intens
-                        boto.style.backgroundColor = "#7e1a1a"; 
-                        boto.style.borderColor = "#e74c3c";
-                        boto.style.color = "#ffffff";
-                        parlar("No és correcte. Escolta millor el so de la pluja i torna a carregar la pàgina.");
-                    }
-                });
-            });
-
-            actualitzarLectorsVeu();
-        }
-
-        // Control del botó d'àudio
-        btnAudio.addEventListener('click', () => {
-            if (!reproduint) {
-                àudioTempesta.play();
-                btnAudio.querySelector('.text').innerText = "Aturar Tempesta";
-                btnAudio.querySelector('.icon').innerText = "⏹️";
-                btnAudio.setAttribute('data-tts', "Botó de so. Prem per aturar el so de la tempesta.");
-                reproduint = true;
-                parlar("Iniciant el so de la tempesta elèctrica al bosc.");
-            } else {
-                àudioTempesta.pause();
-                btnAudio.querySelector('.text').innerText = "Escotar la Tempesta";
-                btnAudio.querySelector('.icon').innerText = "⚡";
-                btnAudio.setAttribute('data-tts', "Botó de so. Prem per escoltar la tempesta.");
-                reproduint = false;
-                parlar("Tempesta aturada.");
-            }
-        });
-
-        window.onload = inicialitzarPregunta;
-    </script>
 </body>
 </html>

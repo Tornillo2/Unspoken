@@ -10,7 +10,7 @@
 
     <main class="game-container">
         <header class="game-header">
-            <button class="btn-tornar" data-tts="Tornar al camí de nivells." onclick="window.location.href='/Nivells/index.html'">⬅️ Camí</button>
+            <button class="btn-tornar" data-tts="Tornar als nivells." onclick="window.location.href='/Nivells/index.html'">⬅️ Tornar</button>
             <h1 tabindex="0" data-tts="Nivell cinc: El Cim de la Muntanya i la Vista Panoràmica.">Nivell 5: El Cim</h1>
         </header>
 
@@ -21,48 +21,25 @@
         </section>
 
         <section class="audio-controls">
-            <button id="btn-audio" class="btn-play-cim" data-tts="Botó de so. Prem per escoltar el silenci majestuós del cim.">
-                <span class="icon">👑</span> 
-                <span class="text">Escotar el Cim</span>
+            <button id="btn-audio" class="btn-play" data-tts="Botó de so. Prem per escoltar el silenci majestuós del cim.">
+                <span class="icon">🔊</span> 
+                <span class="text">Escotar el so</span>
             </button>
         </section>
 
         <section id="zona-preguntes" class="quiz-section">
-            <h2 id="titol-pregunta" tabindex="0">Pregunta del nivell:</h2>
-
-            <div class="quiz-container" style="display: none;">
-                <p class="pregunta-text">Què s'observa des del cim de la muntanya?</p>
-                <div class="quiz-options">
-                    <button class="btn-resposta" data-correcta="true" data-tts="Opció A: Una vista panoràmica espectacular de les valls i els boscos.">A) Una vista panoràmica espectacular de les valls i els boscos.</button>
-                    <button class="btn-resposta" data-correcta="false" data-tts="Opció B: Una paret de roca que tapa tota la llum.">B) Una paret de roca que tapa tota la llum.</button>
-                    <button class="btn-resposta" data-correcta="false" data-tts="Opció C: El fons d'un pou molt profund.">C) El fons d'un pou molt profund.</button>
+            <h2 id="titol-pregunta" tabindex="0" data-tts="">Pregunta del nivell:</h2>
+            <p id="pregunta-text" class="pregunta-text"></p>
+            
+            <div id="quiz-options" class="quiz-options">
                 </div>
-            </div>
-
-            <div class="quiz-container" style="display: none;">
-                <p class="pregunta-text">Com es descriu l'ambient acústic al punt més alt?</p>
-                <div class="quiz-options">
-                    <button class="btn-resposta" data-correcta="false" data-tts="Opció A: Es sents una música de festa molt forta.">A) Es sents una música de festa molt forta.</button>
-                    <button class="btn-resposta" data-correcta="true" data-tts="Opció B: És un silenci majestuós, només trencat per la respiració.">B) És un silenci majestuós, només trencat per la respiració.</button>
-                    <button class="btn-resposta" data-correcta="false" data-tts="Opció C: S'escolta el soroll dels cotxes de la ciutat.">C) S'escolta el soroll dels cotxes de la ciutat.</button>
-                </div>
-            </div>
-
-            <div class="quiz-container" style="display: none;">
-                <p class="pregunta-text">De quin color es veu l'horitzó al fons de tot?</p>
-                <div class="quiz-options">
-                    <button class="btn-resposta" data-correcta="false" data-tts="Opció A: Completament negre de tempesta.">A) Completament negre de tempesta.</button>
-                    <button class="btn-resposta" data-correcta="false" data-tts="Opció B: Color verd fluorescent.">B) Color verd fluorescent.</button>
-                    <button class="btn-resposta" data-correcta="true" data-tts="Opció C: Daurat pel sol.">C) Daurat pel sol.</button>
-                </div>
-            </div>
         </section>
 
         <section id="zona-seguent" style="display: none; margin-top: 30px;">
             <button id="btn-seguent" class="btn-seg" data-tts="Enhorabona!" onclick="window.location.href='/Nivells/Nivell 6/index.html'">Anar al Nivell 6</button>
         </section>
 
-        <audio id="sound-effect" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" loop></audio>
+        <audio id="sound-effect" src="muntanya.mp3" loop></audio>
     </main>
 
     <script>
