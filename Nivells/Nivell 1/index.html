@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Introspoken - Nivell 1: L'Aigua</title>
     <link rel="stylesheet" href="style1.css">
-    <script src="script.js" defer></script>
 </head>
 <body>
 
@@ -29,22 +28,142 @@
         </section>
 
         <section id="zona-preguntes" class="quiz-section">
-            <h2 id="titol-pregunta" tabindex="0" data-tts="Pregunta del nivell: Com és el so d'aquest rierol de muntanya segons la descripció?">Pregunta del nivell:</h2>
-            <p class="pregunta-text">Com és el so d'aquest rierol de muntanya?</p>
+            <h2 id="titol-pregunta" tabindex="0" data-tts="">Pregunta del nivell:</h2>
+            <p id="pregunta-text" class="pregunta-text"></p>
             
-            <div class="quiz-options">
-                <button class="btn-resposta incorrecta" data-tts="Opció A: És un soroll molt fort i brusc, com una cascada gegant.">A) Fort i brusc, com una cascada gegant.</button>
-                <button class="btn-resposta correcta" data-tts="Opció B: És un murmuri continu, com un secret entre les roques.">B) Un murmuri continu, com un secret entre les roques.</button>
-                <button class="btn-resposta incorrecta" data-tts="Opció C: És un so silenciós que gairebé no es pot sentir.">C) Un so silenciós que gairebé no es pot sentir.</button>
-            </div>
+            <div id="quiz-options" class="quiz-options">
+                </div>
         </section>
 
         <section id="zona-seguent" style="display: none; margin-top: 30px;">
-            <button id="btn-seguent" class="btn-seg" data-tts="Felicitats! Has encertat. Prem aquí per anar al Nivell dos: Els Arbres.">Anar al Nivell 2 ➡️</button>
+            <button id="btn-seguent" class="btn-seg" data-tts="Felicitats! Has encertat. Prem aquí per anar al Nivell dos: Els Arbres." onclick="window.location.href='/Nivells/Nivell 2/index.html'">Anar al Nivell 2 ➡️</button>
         </section>
 
         <audio id="sound-effect" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
     </main>
 
+    <script>
+        // Elements de la interfície
+        const btnAudio = document.getElementById('btn-audio');
+        const àudioRiu = document.getElementById('sound-effect');
+        const zonaSeguent = document.getElementById('zona-seguent');
+        const titolPregunta = document.getElementById('titol-pregunta');
+        const textPregunta = document.getElementById('pregunta-text');
+        const contenidorOpcions = document.getElementById('quiz-options');
+
+        let reproduint = false;
+
+        // Banc de preguntes aleatòries
+        const preguntesNivell1 = [
+            {
+                pregunta: "Com és el so d'aquest rierol de muntanya?",
+                opcions: [
+                    { text: "A) Fort i brusc, com una cascada gegant.", correcta: false, tts: "Opció A: És un soroll molt fort i brusc, com una cascada gegant." },
+                    { text: "B) Un murmuri continu, com un secret entre les roques.", correcta: true, tts: "Opció B: És un murmuri continu, com un secret entre les roques." },
+                    { text: "C) Un so silenciós que gairebé no es pot sentir.", correcta: false, tts: "Opció C: És un so silenciós que gairebé no es pot sentir." }
+                ]
+            },
+            {
+                pregunta: "Com està l'aigua d'aquest rierol de muntanya?",
+                opcions: [
+                    { text: "A) Està tèbia i plena de fang.", correcta: false, tts: "Opció A: Està tèbia i plena de fang." },
+                    { text: "B) Està molt calenta per l'estiu.", correcta: false, tts: "Opció B: Està molt calenta per l'estiu." },
+                    { text: "C) És freda i pura.", correcta: true, tts: "Opció C: És freda i pura." }
+                ]
+            },
+            {
+                pregunta: "Sobre quin tipus de superfície llisca l'aigua?",
+                opcions: [
+                    { text: "A) Sobre pedres llises i arrodonides.", correcta: true, tts: "Opció A: Sobre pedres llises i arrodonides." },
+                    { text: "B) Sobre sorra tova de la platja.", correcta: false, tts: "Opció B: Sobre sorra tova de la platja." },
+                    { text: "C) Sobre branques seques i punxegudes.", correcta: false, tts: "Opció C: Sobre branques seques i punxegudes." }
+                ]
+            }
+        ];
+
+        // Lector de veu (TTS)
+        function parlar(text, callback) {
+            window.speechSynthesis.cancel();
+            const missatge = new SpeechSynthesisUtterance(text);
+            missatge.lang = 'ca-ES';
+            missatge.rate = 1.0;
+            if (callback) missatge.onend = callback;
+            window.speechSynthesis.speak(missatge);
+        }
+
+        // Assigna els esdeveniments de veu als elements
+        function actualitzarLectorsVeu() {
+            const totsElements = document.querySelectorAll('[data-tts]');
+            totsElements.forEach(element => {
+                element.onmouseenter = () => { parlar(element.getAttribute('data-tts')); };
+                element.onfocus = () => { parlar(element.getAttribute('data-tts')); };
+            });
+        }
+
+        // Funció que tria i munta una pregunta a l'atzar
+        function carregarPreguntaAleatoria() {
+            const indexAleatori = Math.floor(Math.random() * preguntesNivell1.length);
+            const dadesPregunta = preguntesNivell1[indexAleatori];
+
+            textPregunta.innerText = dadesPregunta.pregunta;
+            titolPregunta.setAttribute('data-tts', "Pregunta del nivell: " + dadesPregunta.pregunta);
+            contenidorOpcions.innerHTML = "";
+
+            dadesPregunta.opcions.forEach(opcio => {
+                const boto = document.createElement('button');
+                boto.className = "btn-resposta";
+                boto.innerText = opcio.text;
+                boto.setAttribute('data-tts', opcio.tts);
+
+                boto.addEventListener('click', () => {
+                    // Desactivem tots els botons d'opcions perquè no es pugui clicar més d'un cop
+                    const botons = contenidorOpcions.querySelectorAll('.btn-resposta');
+                    botons.forEach(b => b.disabled = true);
+
+                    if (opcio.correcta) {
+                        boto.style.backgroundColor = "#285834";
+                        boto.style.borderColor = "#85e39d";
+                        boto.style.color = "#ffffff";
+                        zonaSeguent.style.display = "block";
+                        actualitzarLectorsVeu();
+                        parlar("Excel·lent! Resposta correcta. Prem el botó de baix per anar al següent nivell.");
+                    } else {
+                        boto.style.backgroundColor = "#5c1d1d";
+                        boto.style.borderColor = "#e74c3c";
+                        boto.style.color = "#ffffff";
+                        parlar("Oh, aquesta no és correcta. Recarrega la pàgina per tornar-ho a intentar amb una nova pregunta.");
+                    }
+                });
+
+                contenidorOpcions.appendChild(boto);
+            });
+
+            actualitzarLectorsVeu();
+        }
+
+        // Control del reproductor
+        btnAudio.addEventListener('click', () => {
+            if (!reproduint) {
+                àudioRiu.play();
+                btnAudio.querySelector('.text').innerText = "Aturar el Riu";
+                btnAudio.querySelector('.icon').innerText = "⏹️";
+                btnAudio.setAttribute('data-tts', "Botó de so. Prem per aturar el murmuri del riu.");
+                reproduint = true;
+                parlar("Iniciant el so del riu.");
+            } else {
+                àudioRiu.pause();
+                btnAudio.querySelector('.text').innerText = "Escotar el Riu";
+                btnAudio.querySelector('.icon').innerText = "🔊";
+                btnAudio.setAttribute('data-tts', "Botó de so. Prem per escoltar el murmuri del riu.");
+                reproduint = false;
+                parlar("So aturat.");
+            }
+        });
+
+        // Activa la lògica quan es carrega l'HTML
+        window.onload = () => {
+            carregarPreguntaAleatoria();
+        };
+    </script>
 </body>
 </html>
