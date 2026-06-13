@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introspoken - Nivell 5: El Cim de la Muntanya</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="game-container">
+        <header class="game-header">
+            <button class="btn-tornar" data-tts="Tornar al camí de nivells." onclick="window.location.href='/Nivells/index.html'">⬅️ Camí</button>
+            <h1 tabindex="0" data-tts="Nivell cinc: El Cim de la Muntanya i la Vista Panoràmica.">Nivell 5: El Cim</h1>
+        </header>
+
+        <section class="description-card" tabindex="0" data-tts="Ho has aconseguit! Ets al cim de la muntanya. Davant teu s'obre una vista panoràmica espectacular: es veuen les valls, els boscos que has creuat i, al fons de tot, l'horitzó daurat pel sol. El silenci aquí dalt és majestuós, només trencat pel ressò de la teva pròpia respiració. Has completat l'ascensió.">
+            <h2>Imagina l'entorn:</h2>
+            <p>Ho has aconseguit! Ets al <strong>cim de la muntanya</strong>, el punt més alt de l'aventura.</p>
+            <p>Davant teu s'obre una <strong>vista panoràmica espectacular</strong> on es veuen els boscos que has creuat i un horitzó daurat pel sol.</p>
+        </section>
+
+        <section class="audio-controls">
+            <button id="btn-audio" class="btn-play-cim" data-tts="Botó de so. Prem per escoltar el silenci majestuós del cim.">
+                <span class="icon">👑</span> 
+                <span class="text">Escotar el Cim</span>
+            </button>
+        </section>
+
+        <section id="zona-preguntes" class="quiz-section">
+            <h2 id="titol-pregunta" tabindex="0">Pregunta del nivell:</h2>
+
+            <div class="quiz-container" style="display: none;">
+                <p class="pregunta-text">Què s'observa des del cim de la muntanya?</p>
+                <div class="quiz-options">
+                    <button class="btn-resposta" data-correcta="true" data-tts="Opció A: Una vista panoràmica espectacular de les valls i els boscos.">A) Una vista panoràmica espectacular de les valls i els boscos.</button>
+                    <button class="btn-resposta" data-correcta="false" data-tts="Opció B: Una paret de roca que tapa tota la llum.">B) Una paret de roca que tapa tota la llum.</button>
+                    <button class="btn-resposta" data-correcta="false" data-tts="Opció C: El fons d'un pou molt profund.">C) El fons d'un pou molt profund.</button>
+                </div>
+            </div>
+
+            <div class="quiz-container" style="display: none;">
+                <p class="pregunta-text">Com es descriu l'ambient acústic al punt més alt?</p>
+                <div class="quiz-options">
+                    <button class="btn-resposta" data-correcta="false" data-tts="Opció A: Es sents una música de festa molt forta.">A) Es sents una música de festa molt forta.</button>
+                    <button class="btn-resposta" data-correcta="true" data-tts="Opció B: És un silenci majestuós, només trencat per la respiració.">B) És un silenci majestuós, només trencat per la respiració.</button>
+                    <button class="btn-resposta" data-correcta="false" data-tts="Opció C: S'escolta el soroll dels cotxes de la ciutat.">C) S'escolta el soroll dels cotxes de la ciutat.</button>
+                </div>
+            </div>
+
+            <div class="quiz-container" style="display: none;">
+                <p class="pregunta-text">De quin color es veu l'horitzó al fons de tot?</p>
+                <div class="quiz-options">
+                    <button class="btn-resposta" data-correcta="false" data-tts="Opció A: Completament negre de tempesta.">A) Completament negre de tempesta.</button>
+                    <button class="btn-resposta" data-correcta="false" data-tts="Opció B: Color verd fluorescent.">B) Color verd fluorescent.</button>
+                    <button class="btn-resposta" data-correcta="true" data-tts="Opció C: Daurat pel sol.">C) Daurat pel sol.</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="zona-seguent" style="display: none; margin-top: 30px;">
+            <button id="btn-seguent" class="btn-seg" data-tts="Enhorabona!" onclick="window.location.href='/Nivells/Nivell 6/index.html'">Anar al Nivell 6</button>
+        </section>
+
+        <audio id="sound-effect" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" loop></audio>
+    </main>
+
+    <script>
+        const btnAudio = document.getElementById('btn-audio');
+        const àudioCim = document.getElementById('sound-effect');
+        const zonaSeguent = document.getElementById('zona-seguent');
+        const titolPregunta = document.getElementById('titol-pregunta');
+
+        let reproduint = false;
+
+        function parlar(text, callback) {
+            window.speechSynthesis.cancel();
+            const missatge = new SpeechSynthesisUtterance(text);
+            missatge.lang = 'ca-ES';
+            missatge.rate = 1.0;
+            if (callback) missatge.onend = callback;
+            window.speechSynthesis.speak(missatge);
+        }
+
+        function actualitzarLectorsVeu() {
+            document.querySelectorAll('[data-tts]').forEach(element => {
+                element.onmouseenter = () => { parlar(element.getAttribute('data-tts')); };
+                element.onfocus = () => { parlar(element.getAttribute('data-tts')); };
+            });
+        }
+
+        function inicialitzarPregunta() {
+            const llistaPreguntes = document.querySelectorAll('.quiz-container');
+            if (llistaPreguntes.length === 0) return;
+
+            const indexAleatori = Math.floor(Math.random() * llistaPreguntes.length);
+            const preguntaEscollida = llistaPreguntes[indexAleatori];
+            preguntaEscollida.style.display = "block";
+
+            const textDeLaPregunta = preguntaEscollida.querySelector('.pregunta-text').innerText;
+            titolPregunta.setAttribute('data-tts', "Pregunta del nivell: " + textDeLaPregunta);
+
+            const botonsResposta = preguntaEscollida.querySelectorAll('.btn-resposta');
+
+            botonsResposta.forEach(boto => {
+                boto.addEventListener('click', () => {
+                    botonsResposta.forEach(b => b.disabled = true);
+
+                    const esCorrecta = boto.getAttribute('data-correcta') === "true";
+
+                    if (esCorrecta) {
+                        boto.style.backgroundColor = "#1e8449"; /* Verd èxit */
+                        boto.style.borderColor = "#52be80";
+                        boto.style.color = "#ffffff";
+                        zonaSeguent.style.display = "block";
+                        actualitzarLectorsVeu();
+                        parlar("Victòria! Resposta correcta. Has coronat el cim amb èxit i completat el joc!");
+                    } else {
+                        boto.style.backgroundColor = "#5c1d1d"; 
+                        boto.style.borderColor = "#e74c3c";
+                        boto.style.color = "#ffffff";
+                        parlar("Aquesta resposta no és correcta. Torna a carregar la pàgina per intentar el cim una altra vegada.");
+                    }
+                });
+            });
+
+            actualitzarLectorsVeu();
+        }
+
+        btnAudio.addEventListener('click', () => {
+            if (!reproduint) {
+                àudioCim.play();
+                btnAudio.querySelector('.text').innerText = "Aturar el So";
+                btnAudio.querySelector('.icon').innerText = "⏹️";
+                btnAudio.setAttribute('data-tts', "Botó de so. Prem per aturar l'àudio ambiental del cim.");
+                reproduint = true;
+                parlar("Iniciant l'ambient sonor del cim de la muntanya.");
+            } else {
+                àudioCim.pause();
+                btnAudio.querySelector('.text').innerText = "Escotar el Cim";
+                btnAudio.querySelector('.icon').innerText = "👑";
+                btnAudio.setAttribute('data-tts', "Botó de so. Prem per escoltar el silenci majestuós del cim.");
+                reproduint = false;
+                parlar("So aturat.");
+            }
+        });
+
+        window.onload = () => {
+            inicialitzarPregunta();
+        };
+    </script>
+</body>
+</html>
