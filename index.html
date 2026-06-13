@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escape Room</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+        url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1600');
+    background-size:cover;
+    background-position:center;
+    color:white;
+}
+
+.container{
+    text-align:center;
+    padding:40px;
+    background:rgba(0,0,0,0.55);
+    border:2px solid #00ffcc;
+    border-radius:20px;
+    backdrop-filter: blur(8px);
+    box-shadow:0 0 30px rgba(0,255,204,0.4);
+}
+
+h1{
+    font-size:4rem;
+    margin-bottom:15px;
+    text-transform:uppercase;
+    letter-spacing:4px;
+    color:#00ffcc;
+    text-shadow:0 0 15px #00ffcc;
+}
+
+p{
+    font-size:1.2rem;
+    margin-bottom:30px;
+    color:#ddd;
+}
+
+button{
+    padding:15px 40px;
+    font-size:1.1rem;
+    border:none;
+    border-radius:50px;
+    background:#00ffcc;
+    color:#111;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 20px #00ffcc;
+}
+
+.subtitle{
+    margin-top:10px;
+    font-style:italic;
+    color:#aaa;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Escape Room</h1>
+    <p>Troba les pistes, resol els enigmes i escapa abans que s'acabi el temps.</p>
+
+    <button onclick="startGame()">Començar</button>
+
+    <div class="subtitle">
+        Tens 60 minuts per escapar...
+    </div>
+</div>
+
+<script>
+function startGame() {
+    alert("Comença l'aventura!");
+    // window.location.href = "joc.html";
+}
+</script>
+
+</body>
+</html>
