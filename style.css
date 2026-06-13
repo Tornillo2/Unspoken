@@ -1,4 +1,6 @@
-/* Configuració general i colors de la natura */
+/* ==========================================================================
+   Configuració general i colors de la natura (Mantingut)
+   ========================================================================== */
 body {
     margin: 0;
     padding: 0;
@@ -11,37 +13,71 @@ body {
     min-height: 100vh;
 }
 
-/* Contenidor del Menú */
+/* Contenidor del Menú (Mantingut) */
 .menu-container {
     width: 100%;
     max-width: 600px;
-    padding: 20px;
+    padding: 40px 20px;
     text-align: center;
 }
 
 .menu-header h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: #85e39d; /* Verd brillant per ressaltar el títol */
-    margin-bottom: 10px;
+    margin-bottom: 25px;
+    margin-top: 0;
 }
 
-.menu-header p {
-    font-size: 1.2rem;
-    margin-bottom: 40px;
+/* ==========================================================================
+   Noves seccions de text i història (Afegit)
+   ========================================================================== */
+.menu-story {
+    text-align: left;
+    background-color: #162a19;
+    border-left: 5px solid #387648;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 4px 12px 12px 4px;
+}
+
+.menu-story h2 {
+    font-size: 1.3rem;
+    color: #85e39d;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.menu-story p {
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin: 0;
     color: #cbdccb;
 }
 
-/* Estructura dels botons */
+/* Estil per a les tecles ressaltades (Ex: Tab, Enter) */
+.kbd {
+    background-color: #284e30;
+    border: 1px solid #4a8a59;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: monospace;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   Estructura i estil dels botons (Mantingut i ampliat per colors)
+   ========================================================================== */
 .menu-options {
     display: flex;
     flex-direction: column;
     gap: 20px; /* Espai entre botons perquè no es cliqui per error */
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
-/* Estil de cada botó (Gran i fàcil de clicar) */
+/* Estil base de cada botó */
 .menu-btn {
-    background-color: #1b3822; /* Verd fosc */
-    border: 3px solid #387648; /* Vora marcada */
     border-radius: 15px;
     color: #ffffff;
     padding: 20px;
@@ -51,15 +87,59 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     width: 100%;
+    box-sizing: border-box;
 }
 
-/* Icones grans */
+/* --- Botó 1: Aprenentatge (Verd bosc) --- */
+.menu-btn.o-aprenentatge {
+    background-color: #1b3822;
+    border: 3px solid #387648;
+}
+.menu-btn.o-aprenentatge:hover, .menu-btn.o-aprenentatge:focus {
+    background-color: #285834;
+    border-color: #85e39d;
+    box-shadow: 0 0 15px rgba(133, 227, 157, 0.3);
+}
+
+/* --- Botó 2: Repte (Lila fosc) --- */
+.menu-btn.o-repte {
+    background-color: #231633;
+    border: 3px solid #5a3885;
+}
+.menu-btn.o-repte:hover, .menu-btn.o-repte:focus {
+    background-color: #36224e;
+    border-color: #a275e3;
+    box-shadow: 0 0 15px rgba(162, 117, 227, 0.3);
+}
+
+/* --- Botó 3: Ajuda / Instruccions (Blau fosc) --- */
+.menu-btn.o-ajuda {
+    background-color: #13273a;
+    border: 3px solid #295780;
+}
+.menu-btn.o-ajuda:hover, .menu-btn.o-ajuda:focus {
+    background-color: #1d3b58;
+    border-color: #4ba3e3;
+    box-shadow: 0 0 15px rgba(75, 163, 227, 0.3);
+}
+
+/* Comportament comú de selecció (Mantingut) */
+.menu-btn:hover, .menu-btn:focus {
+    transform: scale(1.03); /* El botó s'engrandeix una mica */
+    outline: none; /* Treu la vora per defecte del navegador */
+}
+
+/* Icones grans (Mantingut) */
 .menu-btn .icon {
     font-size: 2.5rem;
     margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
 }
 
-/* Textos de dins el botó */
+/* Textos de dins el botó (Mantingut) */
 .menu-btn .text {
     font-size: 1.4rem;
     font-weight: bold;
@@ -68,15 +148,28 @@ body {
 
 .menu-btn .subtext {
     font-size: 1rem;
-    color: #a3cfa3;
+    color: #cbdccb;
     display: block;
     margin-top: 4px;
 }
 
-/* Efecte visual quan es passa el ratolí o es selecciona (Focus) */
-.menu-btn:hover, .menu-btn:focus {
-    background-color: #285834;
-    border-color: #85e39d; /* La vora brilla en verd clar */
-    transform: scale(1.03); /* El botó s'engrandeix una mica */
-    outline: none; /* Treu la vora per defecte del navegador */
+/* Els subtextos s'adapten subtilment al color del botó per estètica */
+.menu-btn.o-aprenentatge .subtext { color: #a3cfa3; }
+.menu-btn.o-repte .subtext { color: #caaee6; }
+.menu-btn.o-ajuda .subtext { color: #adcde6; }
+
+/* ==========================================================================
+   Peu de pàgina (Afegit)
+   ========================================================================== */
+.menu-footer {
+    margin-top: 40px;
+    border-top: 1px solid #284e30;
+    padding-top: 20px;
+}
+
+.menu-footer p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #8da38f;
+    margin: 0;
 }
