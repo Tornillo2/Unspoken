@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introspoken - Nivell 3: Els Ocells</title>
+    <title>Introspoken - Nivell 3: Els Ocells i la Fauna</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
 
@@ -43,6 +44,7 @@
     </main>
 
     <script>
+        // Elements de la interfície DOM
         const btnAudio = document.getElementById('btn-audio');
         const àudioOcells = document.getElementById('sound-effect');
         const zonaSeguent = document.getElementById('zona-seguent');
@@ -52,7 +54,7 @@
 
         let reproduint = false;
 
-        // Banc de preguntes aleatòries per al Nivell 3
+        // BANC DE PREGUNTES INTERN (Modificable des d'aquí mateix)
         const preguntesNivell3 = [
             {
                 pregunta: "Quin ocell fa un repicar rítmic sobre l'escorça d'un pi?",
@@ -74,12 +76,13 @@
                 pregunta: "A qui es refereix el text com els 'músics del bosc'?",
                 opcions: [
                     { text: "A) Al soroll que fan les branques seques en caure.", correcta: false, tts: "Opció A: Al soroll que fan les branques seques en caure." },
-                    { text: "B) Al pas dels excursionsites que caminen.", correcta: false, tts: "Opció B: Al pas dels excursionsites que caminen." },
+                    { text: "B) Al pas dels excursionistes que caminen.", correcta: false, tts: "Opció B: Al pas dels excursionistes que caminen." },
                     { text: "C) Als ocells que saluden el nou dia.", correcta: true, tts: "Opció C: Als ocells que saluden el nou dia." }
                 ]
             }
         ];
 
+        // Motor del Lector de Veu (SpeechSynthesis)
         function parlar(text, callback) {
             window.speechSynthesis.cancel();
             const missatge = new SpeechSynthesisUtterance(text);
@@ -89,6 +92,7 @@
             window.speechSynthesis.speak(missatge);
         }
 
+        // Configura el lector de veu (TTS) per ratolí i teclat focus
         function actualitzarLectorsVeu() {
             const totsElements = document.querySelectorAll('[data-tts]');
             totsElements.forEach(element => {
@@ -97,6 +101,7 @@
             });
         }
 
+        // Funció que selecciona una pregunta a l'atzar i la genera
         function carregarPreguntaAleatoria() {
             const indexAleatori = Math.floor(Math.random() * preguntesNivell3.length);
             const dadesPregunta = preguntesNivell3[indexAleatori];
@@ -105,6 +110,7 @@
             titolPregunta.setAttribute('data-tts', "Pregunta del nivell: " + dadesPregunta.pregunta);
             contenidorOpcions.innerHTML = "";
 
+            // Crear botons dinàmicament
             dadesPregunta.opcions.forEach(opcio => {
                 const boto = document.createElement('button');
                 boto.className = "btn-resposta";
@@ -112,6 +118,7 @@
                 boto.setAttribute('data-tts', opcio.tts);
 
                 boto.addEventListener('click', () => {
+                    // Desactivar les altres respostes un cop clicat
                     const botons = contenidorOpcions.querySelectorAll('.btn-resposta');
                     botons.forEach(b => b.disabled = true);
 
@@ -136,6 +143,7 @@
             actualitzarLectorsVeu();
         }
 
+        // Control del reproductor d'àudio
         btnAudio.addEventListener('click', () => {
             if (!reproduint) {
                 àudioOcells.play();
@@ -154,6 +162,7 @@
             }
         });
 
+        // Disparar en obrir la pàgina
         window.onload = () => {
             carregarPreguntaAleatoria();
         };

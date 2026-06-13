@@ -41,7 +41,7 @@ body {
 
 .game-header h1 {
     font-size: 2.6rem;
-    color: #5dade2; /* Blau cel/aigua bonic */
+    color: #5dade2; /* Blau cel bonic */
     margin-top: 60px;
     margin-bottom: 25px;
     clear: both;
@@ -74,9 +74,9 @@ body {
 }
 
 /* ==========================================================================
-   BOTONS DE REPRODUCCIÓ PREMIUM (S'aplica al Nivell 1, 2 i 3)
+   BOTÓ DE REPRODUCCIÓ PREMIUM (Amb degradat i animació)
    ========================================================================== */
-.btn-play, .btn-play-arbres, .btn-play-ocells {
+.btn-play-ocells {
     background: linear-gradient(135deg, #114b27, #1b4f72); /* Degradat de bosc a aigua profunda */
     border: 3px solid #52be80;
     border-radius: 50px;
@@ -94,8 +94,6 @@ body {
     overflow: hidden;
 }
 
-.btn-play:hover, .btn-play:focus,
-.btn-play-arbres:hover, .btn-play-arbres:focus,
 .btn-play-ocells:hover, .btn-play-ocells:focus {
     transform: scale(1.08); /* Creix una mica */
     border-color: #85e39d;
@@ -103,14 +101,12 @@ body {
     outline: none;
 }
 
-/* Animació de la icona (ocell, fulla o altaveu) */
-.btn-play:hover .icon, .btn-play:focus .icon,
-.btn-play-arbres:hover .icon, .btn-play-arbres:focus .icon,
+/* Animació de la icona de l'ocell */
 .btn-play-ocells:hover .icon, .btn-play-ocells:focus .icon {
     animation: ocellBatega 0.5s ease infinite alternate;
 }
 
-.btn-play:active, .btn-play-arbres:active, .btn-play-ocells:active {
+.btn-play-ocells:active {
     transform: scale(0.96); /* Efecte tàctil d'enfonsar-se */
 }
 
@@ -172,7 +168,6 @@ body {
     outline: none;
 }
 
-/* Estil quan estan bloquejats després de respondre */
 .btn-resposta:disabled {
     cursor: not-allowed;
     opacity: 0.8;
@@ -190,6 +185,8 @@ body {
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
+    display: block;
+    margin: 0 auto;
 }
 
 .btn-seg:hover, .btn-seg:focus {
