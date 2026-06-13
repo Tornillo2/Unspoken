@@ -120,6 +120,17 @@ body {
     box-shadow: 0 0 20px rgba(133, 227, 157, 0.4);
 }
 
+.level-card.is-active,
+.btn-tornar.is-active,
+[data-tts].is-active {
+    background-color: #285834;
+    border-color: #85e39d;
+    transform: scale(1.05);
+    outline: 3px solid rgba(244, 249, 244, 0.8);
+    outline-offset: 3px;
+    box-shadow: 0 0 20px rgba(133, 227, 157, 0.4);
+}
+
 /* En pantalles molt petites ho centrem una mica perquè no surti de la pantalla */
 @media (max-width: 500px) {
     .level-card {

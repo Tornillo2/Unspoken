@@ -1,79 +1,119 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ca">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Introspoken - El Camí de la Natura</title>
-    <link rel="stylesheet" href="style-nivells.css">
+    <link rel="stylesheet" href="style-nivells.css" />
     <script src="script-nivells.js" defer></script>
-</head>
-<body>
-
+  </head>
+  <body>
     <main class="menu-container">
-        <header class="menu-header">
-            <button class="btn-tornar" data-tts="Tornar al menú principal." onclick="window.location.href='/index.html'">⬅️ Tornar</button>
-            <h1 tabindex="0" data-tts="El camí dels nivells. Comença des de dalt amb el nivell u.">El Camí de la Natura</h1>
-            <p tabindex="0" data-tts="Segueix el sender cap avall. Cada revolt és un nou descobriment sonor.">Segueix el sender cap avall. Cada revolt és un nou descobriment.</p>
-        </header>
+      <header class="menu-header">
+        <button
+          class="btn-tornar"
+          data-tts="Tornar al menú principal."
+          onclick="window.location.href = '/index.html'"
+        >
+          ⬅️ Tornar
+        </button>
+        <h1
+          tabindex="0"
+        >
+          Nivells
+        </h1>
+      </header>
 
-        <nav class="levels-path">
-            
-            <button class="level-card pos-centre" data-tts="Nivell 1: L'Aigua. El murmuri inicial dels rius i rierols." onclick="window.location.href='Nivell 1/index.html'">
-    <span class="level-num">1</span>
-    <span class="icon">💧</span>
-    <span class="level-title">L'Aigua</span>
-</button>
+      <nav class="levels-path">
+        <button
+          class="level-card pos-centre"
+          data-tts="Nivell 1: L'Aigua. El murmuri inicial dels rius i rierols."
+          onclick="window.location.href = 'Nivell 1/index.html'"
+        >
+          <span class="level-num">1</span>
+          <span class="icon">💧</span>
+          <span class="level-title">L'Aigua</span>
+        </button>
 
-            <button class="level-card pos-esquerra" data-tts="Nivell 2: Els Arbres. El vent movent les fulles i les branques."onclick="window.location.href='Nivell 2/index.html'">
-                <span class="level-num">2</span>
-                <span class="icon">🍃</span>
-                <span class="level-title">Els Arbres</span>
-            </button>
+        <button
+          class="level-card pos-esquerra"
+          data-tts="Nivell 2: Els Arbres. El vent movent les fulles i les branques."
+          onclick="window.location.href = 'Nivell 2/index.html'"
+        >
+          <span class="level-num">2</span>
+          <span class="icon">🍃</span>
+          <span class="level-title">Els Arbres</span>
+        </button>
 
-            <button class="level-card pos-dreta" data-tts="Nivell 3: Ocells del Matí. Els premiers cants de l'alba."onclick="window.location.href='Nivell 3/index.html'">
-                <span class="level-num">3</span>
-                <span class="icon">🐦</span>
-                <span class="level-title">Ocells del Matí</span>
-            </button>
+        <button
+          class="level-card pos-dreta"
+          data-tts="Nivell 3: Ocells del Matí. Els premiers cants de l'alba."
+          onclick="window.location.href = 'Nivell 3/index.html'"
+        >
+          <span class="level-num">3</span>
+          <span class="icon">🐦</span>
+          <span class="level-title">Ocells del Matí</span>
+        </button>
 
+<<<<<<< HEAD
+        <button
+          class="level-card pos-centre"
+          data-tts="Nivell 4: Passos Amagats. Petits animals movent-se entre la fullaraca."
+        >
+          <span class="level-num">4</span>
+          <span class="icon">🦔</span>
+          <span class="level-title">Passos Amagats</span>
+        </button>
+=======
             <button class="level-card pos-centre" data-tts="Nivell 4: Passos Amagats. Petits animals movent-se entre la fullaraca."onclick="window.location.href='Nivell 4/index.html'">
                 <span class="level-num">4</span>
                 <span class="icon">🦔</span>
                 <span class="level-title">Passos Amagats</span>
             </button>
+>>>>>>> f31fdcde281e32212658a469658388bba6c64d18
 
-            <button class="level-card pos-esquerra" data-tts="Nivell 5: La Pluja. El so de les gotes sobre la terra."onclick="window.location.href='Nivell 5/index.html'">
+            <button class="level-card pos-esquerra" data-tts="Nivell 5: La Pluja. El so de les gotes sobre la terra.">
                 <span class="level-num">5</span>
                 <span class="icon">🌧️</span>
                 <span class="level-title">La Pluja</span>
             </button>
 
-            <button class="level-card pos-dreta" data-tts="Nivell 6: El Bosc Nocturn. Mussols i grills sota les estrelles.">
-                <span class="level-num">6</span>
-                <span class="icon">🦉</span>
-                <span class="level-title">Bosc Nocturn</span>
-            </button>
+        <button
+          class="level-card pos-dreta"
+          data-tts="Nivell 6: El Bosc Nocturn. Mussols i grills sota les estrelles."
+        >
+          <span class="level-num">6</span>
+          <span class="icon">🦉</span>
+          <span class="level-title">Bosc Nocturn</span>
+        </button>
 
-            <button class="level-card pos-centre" data-tts="Nivell 7: Grans Animals. El pas pesat dels senglars i cérvols.">
-                <span class="level-num">7</span>
-                <span class="icon">🐗</span>
-                <span class="level-title">Grans Animals</span>
-            </button>
+        <button
+          class="level-card pos-centre"
+          data-tts="Nivell 7: Grans Animals. El pas pesat dels senglars i cérvols."
+        >
+          <span class="level-num">7</span>
+          <span class="icon">🐗</span>
+          <span class="level-title">Grans Animals</span>
+        </button>
 
-            <button class="level-card pos-esquerra" data-tts="Nivell 8: Petits Insectes. El brunzit de les abelles a les flors.">
-                <span class="level-num">8</span>
-                <span class="icon">🐝</span>
-                <span class="level-title">Insectes</span>
-            </button>
+        <button
+          class="level-card pos-esquerra"
+          data-tts="Nivell 8: Petits Insectes. El brunzit de les abelles a les flors."
+        >
+          <span class="level-num">8</span>
+          <span class="icon">🐝</span>
+          <span class="level-title">Insectes</span>
+        </button>
 
-            <button class="level-card pos-dreta" data-tts="Nivell 9: La Tempesta. Trons lluyanys i la força del vent.">
-                <span class="level-num">9</span>
-                <span class="icon">⚡</span>
-                <span class="level-title">La Tempesta</span>
-            </button>
-
-        </nav>
+        <button
+          class="level-card pos-dreta"
+          data-tts="Nivell 9: La Tempesta. Trons lluyanys i la força del vent."
+        >
+          <span class="level-num">9</span>
+          <span class="icon">⚡</span>
+          <span class="level-title">La Tempesta</span>
+        </button>
+      </nav>
     </main>
-
-</body>
+  </body>
 </html>
