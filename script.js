@@ -214,6 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (data && data.game_id) {
         localStorage.setItem("currentGameID", data.game_id);
         localStorage.setItem("seed", data.seed);
+        localStorage.setItem("currentLevel", 1);
         console.log("New game started with ID:", data.game_id);
         updateContinueButtonLabel(localStorage.getItem("currentLevel"));
 

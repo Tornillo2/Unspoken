@@ -71,6 +71,7 @@ body {
     transition: all 0.3s ease;
     width: 75%; /* No ocupen tot l'ample per poder fer el balanceig */
     box-sizing: border-box;
+    position: relative;
 }
 
 /* Modificadors de posició per fer la ziga-zaga del camí */
@@ -129,6 +130,38 @@ body {
     outline: 3px solid rgba(244, 249, 244, 0.8);
     outline-offset: 3px;
     box-shadow: 0 0 20px rgba(133, 227, 157, 0.4);
+}
+
+.level-card.is-locked {
+    background-color: #0f1b12;
+    border-color: #3b4c3f;
+    color: #7f8f82;
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.lock-badge {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 1.4rem;
+    line-height: 1;
+    background: rgba(7, 20, 11, 0.85);
+    border: 1px solid #3b4c3f;
+    border-radius: 999px;
+    padding: 4px 8px;
+    color: #c5d3c8;
+}
+
+.level-card.is-locked:hover,
+.level-card.is-locked:focus {
+    background-color: #0f1b12;
+    border-color: #3b4c3f;
+    color: #7f8f82;
+    transform: none;
+    box-shadow: none;
 }
 
 /* En pantalles molt petites ho centrem una mica perquè no surti de la pantalla */

@@ -192,6 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
       .done((response) => {
         console.log("Progrés guardat correctament:", response);
+        localStorage.setItem("currentLevel", nivellActual);
       })
       .fail((error) => {
         console.error("Error guardant el progrés:", error);

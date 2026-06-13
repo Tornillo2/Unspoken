@@ -156,6 +156,10 @@ document.addEventListener("DOMContentLoaded", () => {
     })
       .done((response) => {
         console.log("Progrés guardat correctament:", response);
+<<<<<<< HEAD
+        localStorage.setItem("currentLevel", nivellActual);
+=======
+>>>>>>> 66ec1c153c02569a9d2c8c1134de08eb11985d92
       })
       .fail((error) => {
         console.error("Error guardant el progrés:", error);
